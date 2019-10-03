@@ -1,0 +1,2 @@
+account number(1234567\n)
+acount amount($3000)

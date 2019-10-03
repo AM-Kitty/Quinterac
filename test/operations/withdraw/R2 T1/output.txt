@@ -1,0 +1,1 @@
+Error prompt for withdrawals above $1,000

@@ -1,0 +1,1 @@
+Error prompt for user trying to do other transactions when logged out

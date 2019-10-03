@@ -1,0 +1,1 @@
+Error prompt for daily withdrawals amount in ATM exceeds

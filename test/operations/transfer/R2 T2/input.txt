@@ -1,0 +1,4 @@
+ATM
+account number(1234567\n)
+account number(1234567\n)
+transfer amount($50000)

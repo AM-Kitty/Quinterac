@@ -1,0 +1,1 @@
+Error prompt for withdrawals amount exceeds in agent mode 

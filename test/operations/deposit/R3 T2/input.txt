@@ -1,0 +1,6 @@
+ATM
+account number(e.g. 1234567\n)
+deposit number(e.g. $2000)
+
+account number(e.g. 1234567\n)
+deposit number(e.g. $2000)

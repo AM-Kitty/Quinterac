@@ -1,0 +1,1 @@
+Error prompt for account number beginning with 0.

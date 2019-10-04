@@ -1,1 +1,1 @@
-Error prompt for user trying to delete account logged ou
+Error prompt for user trying to delete account after logged out

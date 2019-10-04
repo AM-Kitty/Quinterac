@@ -1,0 +1,1 @@
+Error prompt for user trying to create account after logged out

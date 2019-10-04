@@ -1,1 +1,1 @@
-Error prompt for user trying to transfer after logged out
+Error prompt for user trying to transfer after logout

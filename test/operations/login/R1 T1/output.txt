@@ -1,1 +1,1 @@
-Error prompt for user to login.
+Error prompt for user to logout before login.

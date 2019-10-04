@@ -1,1 +1,1 @@
-Error prompt for user trying to deposit after logged out
+Error prompt for user trying to deposit after logout

@@ -1,2 +1,2 @@
-logout
-withdraw
+atm
+deleteacct

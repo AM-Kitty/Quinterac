@@ -1,1 +1,3 @@
-tansfer
+login
+logout
+withdraw

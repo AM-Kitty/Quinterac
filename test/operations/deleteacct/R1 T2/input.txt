@@ -1,2 +1,2 @@
-logout 
-deposit
+agent
+deleteacct

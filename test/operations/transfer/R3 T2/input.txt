@@ -1,4 +1,4 @@
 Agent
 account number(e.g. 1234567\n)
 account number(e.g. 1234567\n)
-transfer amount(e.g. $999,999.99)
+transfer amount(e.g. 99999999)

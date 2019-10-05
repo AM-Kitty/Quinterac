@@ -1,4 +1,4 @@
 ATM
 deposit
 account number(e.g. 1234567\n)
-account amount(e.g. 300000)
+account amount(e.g. 300000 in cents)

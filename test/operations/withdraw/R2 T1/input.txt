@@ -1,3 +1,3 @@
 ATM
 account number(1234567\n)
-withdrwa amount($2000)
+withdrwa amount(200000)

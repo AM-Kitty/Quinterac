@@ -1,0 +1,1 @@
+Error prompt for each line not exactly 7 characters 

@@ -1,0 +1,1 @@
+Error prompt for the account being deleted

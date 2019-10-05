@@ -1,4 +1,4 @@
 agent
 createacct
-0123456
-name
+account number(e.g. 0123456\n)
+account name(e.g. TESTUSER)

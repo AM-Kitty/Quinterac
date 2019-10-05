@@ -1,3 +1,4 @@
 Agent
+deposit
 account number(e.g. 1234567\n)
-deposit amount(e.g. $999,999.99)
+deposit amount(e.g. $999,999.99 in cents)

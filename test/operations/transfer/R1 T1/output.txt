@@ -1,1 +1,1 @@
-Error prompt for invalid account number
+Error prompt for invalid from account number

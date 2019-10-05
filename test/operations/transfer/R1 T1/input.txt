@@ -1,4 +1,2 @@
 transfer
 account number (e.g. 0123456\n)
-account number (e.g. 1234567\n)
-transfer amount(e.g. 200000)

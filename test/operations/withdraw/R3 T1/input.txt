@@ -1,4 +1,5 @@
 ATM
+withdraw
 account number(e.g.1234567\n)
 withdraw amount(e.g.500000)
 

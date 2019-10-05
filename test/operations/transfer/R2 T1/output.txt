@@ -1,1 +1,1 @@
-Error prompt for exceeding the limit
+Error prompt for exceeding the transfer limit

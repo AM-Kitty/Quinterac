@@ -1,1 +1,1 @@
-Error prompt for invalid name
+Error prompt for invalid account name should be within 3 and 30 alphabetical characters

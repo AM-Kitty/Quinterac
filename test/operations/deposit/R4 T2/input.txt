@@ -1,4 +1,4 @@
 Agent
 deposit
 account number(e.g. 1234567\n)
-deposit amount(e.g. $999,999.99 in cents)
+deposit amount(e.g. 99999999)

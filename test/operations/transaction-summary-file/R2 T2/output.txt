@@ -1,1 +1,1 @@
-Error prompt for invalid account number format
+Error prompt for invalid account number format (exactly seven numbers not start from 0)

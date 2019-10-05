@@ -1,1 +1,1 @@
-Error prompt for exceeding characters in a line 
+Error prompt for exceeding 60 characters in a line 

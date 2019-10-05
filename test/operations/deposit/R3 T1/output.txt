@@ -1,1 +1,1 @@
-Error prompt for daily deposit in ATM exceeds
+Error prompt for daily deposit in ATM exceeds $5000

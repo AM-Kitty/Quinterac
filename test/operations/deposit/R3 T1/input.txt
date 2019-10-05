@@ -1,9 +1,10 @@
 ATM
+deposit
 account number(e.g.1234567\n)
-deposit amount(e.g.$2000)
-
+deposit amount(e.g.$2000 in cents)
+deposit
 account number(e.g.1234567\n)
-deposit amount(e.g.$2000)
-
+deposit amount(e.g.$2000 in cents)
+deposit
 account number(e.g.1234567\n)
-deposit amount(e.g.$2000)
+deposit amount(e.g.$2000 in cents)

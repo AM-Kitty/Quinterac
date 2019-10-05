@@ -1,3 +1,2 @@
 deleteacct
 login
-account number (e.g. Deleted Account\n)

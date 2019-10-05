@@ -1,3 +1,4 @@
 ATM
+deposit
 account number(1234567\n)
-acount amount($3000)
+account amount(300000 in cents)

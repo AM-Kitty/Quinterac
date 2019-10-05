@@ -1,7 +1,7 @@
 agent
 createacct
-1234567
-name1
+account number1(e.g. 1234567\n)
+account name1(e.g. TESTUSER1\n)
 createacct
-1234567
-name2
+account number2(e.g. 1234567\n)
+account name2(e.g. TESTUSER2\n)

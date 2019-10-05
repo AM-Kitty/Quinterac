@@ -1,2 +1,3 @@
-logout
-deposit
+deleteacct
+account number (e.g. 0123456/ 01234\n)
+account name (e.g. TESTUSER\n)

@@ -1,0 +1,1 @@
+Error prompt for the amount being deleted

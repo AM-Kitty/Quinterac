@@ -1,0 +1,4 @@
+agent
+deleteacct
+account number (e.g. 1234567\n)
+account name (e.g. TESTUSER\n)

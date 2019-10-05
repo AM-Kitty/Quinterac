@@ -1,1 +1,1 @@
-Successfully create an account.
+Error prompt for invalid account name that is over 30 alphabetic characters

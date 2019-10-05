@@ -1,1 +1,2 @@
+transfer
 account number (0123456\n)

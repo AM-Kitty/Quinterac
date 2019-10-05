@@ -1,1 +1,0 @@
-Successfully delete an account in agent mode

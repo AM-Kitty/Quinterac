@@ -1,1 +1,1 @@
-Error prompt for invalid deposit amount per time
+Error prompt for invalid deposit amount over $2000 per time

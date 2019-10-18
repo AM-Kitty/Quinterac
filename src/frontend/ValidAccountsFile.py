@@ -20,6 +20,7 @@ class ValidAccountsFile:
     # modify the valid account
     def modify_file_ValidAccount(self, valid_account_list):
         file = open("ValidAccountListFile.txt", "w")
+        # write all valid accounts into the valid account list file
         for i in valid_account_list:
             file.write(str(i) + "\n")
         file.close()

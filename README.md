@@ -5,3 +5,4 @@ Member: Tongxu Ge 20054696
         Yanyu Yang 20075550
         Jinghong Xiao 20035787
         
+Note: Our source is in src folder.

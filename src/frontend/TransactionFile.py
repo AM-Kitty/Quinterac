@@ -5,13 +5,14 @@ manage and write in transaction summary file for ending bank session
 '''
 class TransactionFile:
 
-    #  function for writing a transaction summary file
+    # function for writing a transaction summary file
     def write_trans_summry(self, transaction_list):
         newsummary = ""
         space = " "
         try:
             file_data = open("TransactionSummaryFile.txt", "a")
 
+            # try to store transaction summary in the transaction summary file
             if transaction_list[1] == "DEP":
                 newsummary += (transaction_list[1] + space)
                 newsummary += (str(transaction_list[2]) + space)

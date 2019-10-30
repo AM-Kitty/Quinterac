@@ -1,4 +1,3 @@
-import tempfile
 from importlib import reload
 import os
 import io
@@ -15,20 +14,20 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-
     helper(
         capsys=capsys,
         terminal_input=[
-            '1','m','1'
+            '1','m','2'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***'],
         expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
-        ],
-        expected_output_transactions= "daedewdwqe"
+            'Log out successfully!'
+        ]
     )
+
 '''
 
     helper(
@@ -44,20 +43,20 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['test']
     )
-
-        helper(
+    helper(
         capsys=capsys,
         terminal_input=[
-            '1','m','2'
+            '1','m','1'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Log out successfully!'
+            'Error prompt for multiple login.'
         ],
-        expected_output_transactions=["test"]
+        expected_output_transactions= "daedewdwqe"
     )
+
 '''
 
 def helper(
@@ -81,18 +80,18 @@ def helper(
     reload(app)
 
     # create a temporary file in the system to store output transactions
-    temp_fd, temp_file = tempfile.mkstemp()
-    transaction_summary_file = temp_file
+    #temp_fd, temp_file = tempfile.mkstemp()
+    transaction_summary_file = "frontend/TransactionSummaryFile.txt"
 
     # create a temporary file in the system to store the valid accounts:
-    temp_fd2, temp_file2 = tempfile.mkstemp()
-    valid_account_list_file = temp_file2
+    #temp_fd2, temp_file2 = tempfile.mkstemp()
+    valid_account_list_file = "frontend/ValidAccountListFile.txt"
     with open(valid_account_list_file, 'w') as wf:
         wf.write('\n'.join(intput_valid_accounts))
 
     # prepare program parameters
     sys.argv = [
-        'app.py',
+        'Frontend.py',
         valid_account_list_file,
         transaction_summary_file]
 
@@ -135,7 +134,3 @@ def helper(
 
         for ind in range(len(content)):
             assert content[ind] == expected_output_transactions[ind]
-
-    # clean up
-    os.close(temp_fd)
-    os.remove(temp_file)

@@ -25,11 +25,11 @@ class Frontend:
             try:
                 transaction = int(transaction)
                 if transaction < 1 or transaction > 7:
-                    print("Enter a valid number!")
+                    print("\nEnter a valid number!")
                 else:
                     return transaction
             except ValueError:
-                print("Enter a valid number!")
+                print("\nEnter a valid number!")
 
     # allow the user to choose ATM or agent mode
     def mode_check(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
@@ -39,7 +39,7 @@ class Frontend:
         mode_name = input("Which mode do you want to login:")
         # while loop used to check valid input for mode
         while mode_name != "m" and mode_name != "a":
-            print("Please enter a valid mode!")
+            print("\nPlease enter a valid mode!")
             mode_name = input("Which mode do you want to login:")
         print()
         self.check_trans(self.open_system(), mode_name, transaction_list, valid_account_list, create_acct_list,
@@ -73,7 +73,7 @@ class Frontend:
     def login(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
         # check if multiple login or not
         if transaction_list.count(1) > 1:
-            print("Error prompt for multiple login.")
+            print("\nError prompt for multiple login.")
             transaction_list.remove(1)
             return 1
         else:
@@ -83,7 +83,7 @@ class Frontend:
     def logout(self, transaction_list, valid_account_list):
         # can not logout before login
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed.")
+            print("\nError prompt for login failed.")
             return 1
         else:
             # get transaction file from TransactionFile class
@@ -101,7 +101,7 @@ class Frontend:
         print()
         # cannot create account before login
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         else:
             # construct a new instance for transaction file
@@ -113,7 +113,7 @@ class Frontend:
                 account_number = accoun_check.get_account_number()
                 # check if account number is valid or not
                 while account_number in valid_account_list:
-                    print("Should not be same account number (account already exist)")
+                    print("\nShould not be same account number (account already exist)")
                     account_number = accoun_check.get_account_number()
                 # add new account to the valid accounts list
                 valid_account_list.append(account_number)
@@ -125,7 +125,7 @@ class Frontend:
                 self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,
                                  use_daily_limit)
             else:
-                print("Error prompt for ATM creat account or delete account! Please enter other operations!\n")
+                print("\nError prompt for ATM creat account or delete account! Please enter other operations!\n")
                 self.check_trans(self.open_system(), "m", [transaction_list[0]], valid_account_list, create_acct_list,
                                  use_daily_limit)
 
@@ -133,7 +133,7 @@ class Frontend:
     def deleteacct(self, transaction_list, mode, valid_account_list, create_acct_list, use_daily_limit):
         print()
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         else:
             # construct a new instance for transaction file
@@ -157,7 +157,7 @@ class Frontend:
                 self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,
                                  use_daily_limit)
             else:
-                print("Error prompt for ATM creat account or delete account! Please enter other operations!\n")
+                print("\nError prompt for ATM creat account or delete account! Please enter other operations!\n")
                 self.check_trans(self.open_system(), "m", [transaction_list[0]], valid_account_list, create_acct_list,
                                  use_daily_limit)
 
@@ -169,24 +169,24 @@ class Frontend:
         accoun_check = a.AccountCheck()
         # deposit before login
         if transaction_list.count(1) == 0:
-            print("Error! Error prompt for login failed")
+            print("\nError! Error prompt for login failed")
             return 1
         account_number = accoun_check.get_account_number()
         # while loop used to check for valid account number
         while account_number not in valid_account_list:
-            print("Account not exist! Enter a exist account to deposit!")
+            print("\nAccount not exist! Enter a exist account to deposit!")
             account_number = accoun_check.get_account_number()
         if account_number in create_acct_list:
-            print("Error! Account just create, cannot do anything!")
+            print("\nError! Account just create, cannot do anything!")
             return 1
         print()
         amount = accoun_check.get_amount()
         # while loop used to check for valid amount in agent or ATM mode respectively
         while amount > 2000 and mode == "m":
-            print("Over deposit limit, enter a valid amount!")
+            print("\nOver deposit limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         while amount > 999999.99 and mode == "a":
-            print("Over deposit limit, enter a valid amount!")
+            print("\nOver deposit limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         exist = False
         # check daily deposit limit in ATM mode
@@ -217,24 +217,24 @@ class Frontend:
         accoun_check = a.AccountCheck()
         # error if withdraw before login
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         account_number = accoun_check.get_account_number()
         # check if the user enter the valid account number
         while account_number not in valid_account_list:
-            print("Account not exist! Enter a existed account to withdraw!")
+            print("\nAccount not exist! Enter a existed account to withdraw!")
             account_number = accoun_check.get_account_number()
         if account_number in create_acct_list:
-            print("Error! Account just create, cannot do anything!")
+            print("\nError! Account just create, cannot do anything!")
             return 1
         print()
         # check if the user enter the valid amount in ATM and agen mode respectively
         amount = accoun_check.get_amount()
         while amount > 1000 and mode == "m":
-            print("Over withdraw limit, enter a valid amount!")
+            print("\nOver withdraw limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         while amount > 999999.99 and mode == "a":
-            print("Over withdraw limit, enter a valid amount!")
+            print("\nOver withdraw limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         exist = False
         if use_daily_limit == [] and mode == "m":
@@ -264,7 +264,7 @@ class Frontend:
         ws = t.TransactionFile()  # construct a new instance for transaction file
         # error if transfer before login
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         print("Transfer from ------>")
         account_number1 = accoun_check.get_account_number()
@@ -277,7 +277,7 @@ class Frontend:
             print("\nTransfer to -------->")
             account_number2 = accoun_check.get_account_number()
         if account_number1 in create_acct_list or account_number2 in create_acct_list:
-            print("Error! Account just create, cannot do anything!")
+            print("\nError! Account just create, cannot do anything!")
             return 1
         print()
         amount = accoun_check.get_amount()
@@ -298,7 +298,7 @@ class Frontend:
                         exist = True
                         use_daily_limit[i][2] += amount
                         if use_daily_limit[i][2] > 10000:
-                            print("Error! Over daily transfer limit!")
+                            print("\nError! Over daily transfer limit!")
                             return 1
             if exist == False:
                 use_daily_limit.append([account_number1, "XFR", amount])

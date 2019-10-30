@@ -5,6 +5,15 @@ including money amount,account number and name
 '''
 class AccountCheck:
 
+    def __init__(self, file):
+        self.file = file
+        self.accounts = []
+        with open(file) as of:
+            self.accounts = of.readlines()
+
+    def check_account_exist(self, acc):
+        return acc in self.accounts
+
     # get input of deposit or transfer amount from user
     def get_amount(self):
         while True:

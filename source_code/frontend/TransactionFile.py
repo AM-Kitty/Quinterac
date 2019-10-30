@@ -20,7 +20,6 @@ class TransactionFile:
         space = " "
         try:
             global output_transaction_summary_file
-            file_data = open("TransactionSummaryFile.txt", "a")
 
             if output_transaction_summary_file is None:
                 output_transaction_summary_file =[]

@@ -1,17 +1,12 @@
-from frontend.TransactionFile import TransactionFile
+
+import frontend.TransactionFile as t
 import frontend.ValidAccountsFile as v
-from frontend.Accountcheck import AccountCheck
-import sys
+import frontend.Accountcheck as a
 
 '''
 Class Frontend:
 overall bank interface to allow user to do transactions
 '''
-
-valid_account_list_file = None
-output_transaction_summary_file = None
-account_checker = None
-transaction_maintainer = None
 
 
 class Frontend:
@@ -107,7 +102,7 @@ class Frontend:
         print()
         # cannot create account before login
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         else:
             # construct a new instance for transaction file
@@ -139,7 +134,7 @@ class Frontend:
     def deleteacct(self, transaction_list, mode, valid_account_list, create_acct_list, use_daily_limit):
         print()
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         else:
             # construct a new instance for transaction file
@@ -175,7 +170,7 @@ class Frontend:
         accoun_check = a.AccountCheck()
         # deposit before login
         if transaction_list.count(1) == 0:
-            print("Error! Error prompt for login failed")
+            print("\nError! Error prompt for login failed")
             return 1
         account_number = accoun_check.get_account_number()
         # while loop used to check for valid account number
@@ -223,7 +218,7 @@ class Frontend:
         accoun_check = a.AccountCheck()
         # error if withdraw before login
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         account_number = accoun_check.get_account_number()
         # check if the user enter the valid account number
@@ -270,7 +265,7 @@ class Frontend:
         ws = t.TransactionFile()  # construct a new instance for transaction file
         # error if transfer before login
         if transaction_list.count(1) == 0:
-            print("Error prompt for login failed")
+            print("\nError prompt for login failed")
             return 1
         print("Transfer from ------>")
         account_number1 = accoun_check.get_account_number()
@@ -319,16 +314,6 @@ class Frontend:
 
 def main():
     print("Welcome to bank system!!!!\n")
-
-    output_transaction_summary_file = sys.argv[2]
-    valid_account_list_file = sys.argv[1]
-
-    global  account_checker
-    global  transaction_maintainer
-    account_checker = AccountCheck(valid_account_list_file)
-    transaction_maintainer = TransactionFile(output_transaction_summary_file)
-
-
     filedata = v.ValidAccountsFile()
     valid_account_list = filedata.readfile_ValidAccount()
     transaction_list = []
@@ -336,5 +321,4 @@ def main():
     use_daily_limit = []
     current_mode = None  # Not login, mode not start yet
     front = Frontend()
-    front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list,
-                      use_daily_limit)
+    front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list, use_daily_limit)

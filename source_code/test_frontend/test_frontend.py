@@ -19,6 +19,21 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
+            '1','m','1'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for multiple login.'
+        ],
+        expected_output_transactions= "daedewdwqe"
+    )
+'''
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
             '1', 'm', '7','1234567','7654321','100','2'
         ],
         intput_valid_accounts=[
@@ -30,8 +45,7 @@ def test_r2(capsys):
         expected_output_transactions=['test']
     )
 
-'''
-    helper(
+        helper(
         capsys=capsys,
         terminal_input=[
             '1','m','2'
@@ -42,21 +56,7 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Log out successfully!'
         ],
-        expected_output_transactions=None
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            '1','m','1'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
-        ],
-        expected_output_transactions=None
+        expected_output_transactions=["test"]
     )
 '''
 

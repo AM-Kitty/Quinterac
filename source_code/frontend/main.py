@@ -1,5 +1,3 @@
-#This is the main function for test.
-
 import Frontend as f
 import ValidAccountsFile as v
 

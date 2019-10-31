@@ -14,10 +14,95 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
+
     helper(
         capsys=capsys,
         terminal_input=[
-            'login','atm', 'logout'
+            'login','atm','logout'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed.'
+        ],
+        expected_output_transactions=[]
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'create account'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed'
+        ],
+        expected_output_transactions=[]
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'delete account'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed'
+        ],
+        expected_output_transactions=[]
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'deposit'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error! Error prompt for login failed'
+        ],
+        expected_output_transactions=[]
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'withdraw'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed'
+        ],
+        expected_output_transactions=[]
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'transfer'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed'
+        ],
+        expected_output_transactions=[]
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout'
         ],
         intput_valid_accounts=[
             '1234567'
@@ -28,25 +113,10 @@ def test_r2(capsys):
         ]
     )
 
-'''
-
     helper(
         capsys=capsys,
         terminal_input=[
-            '1', 'm', '7','1234567','7654321','100','2'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Log out successfully!'
-        ],
-        expected_output_transactions=['test']
-    )
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            '1','m','1'
+            'login', 'atm', 'login'
         ],
         intput_valid_accounts=[
             '1234567'
@@ -54,11 +124,37 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Error prompt for multiple login.'
         ],
-        expected_output_transactions= "daedewdwqe"
+        expected_output_transactions=[]
     )
 
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'login'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for multiple login.'
+        ],
+        expected_output_transactions=[]
+    )
 '''
-
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'withdraw'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for multiple login.'
+        ],
+        expected_output_transactions=[]
+    )
+'''
 def helper(
         capsys,
         terminal_input,
@@ -80,11 +176,12 @@ def helper(
     reload(app)
 
     # create a temporary file in the system to store output transactions
-    #temp_fd, temp_file = tempfile.mkstemp()
-    transaction_summary_file = "frontend/TransactionSummaryFile.txt"
+    # temp_fd, temp_file = tempfile.mkstemp()
+    transaction_summary_file = "TransactionSummaryFile.txt"
+    open(transaction_summary_file, 'w').close()
 
     # create a temporary file in the system to store the valid accounts:
-    #temp_fd2, temp_file2 = tempfile.mkstemp()
+    # temp_fd2, temp_file2 = tempfile.mkstemp()
     valid_account_list_file = "frontend/ValidAccountListFile.txt"
     with open(valid_account_list_file, 'w') as wf:
         wf.write('\n'.join(intput_valid_accounts))
@@ -134,3 +231,4 @@ def helper(
 
         for ind in range(len(content)):
             assert content[ind] == expected_output_transactions[ind]
+

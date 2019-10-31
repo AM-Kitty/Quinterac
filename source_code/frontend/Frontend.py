@@ -1,6 +1,12 @@
-import TransactionFile as t
-import ValidAccountsFile as v
-import Accountcheck as a
+
+import frontend.TransactionFile as t
+import frontend.ValidAccountsFile as v
+import frontend.Accountcheck as a
+
+'''
+Class Frontend:
+overall bank interface to allow user to do transactions
+'''
 
 class Frontend:
 
@@ -204,7 +210,7 @@ class Frontend:
             print("Error! Account just create, cannot do anything!")
             return 1
 
-        print()  
+        print()
         amount = accoun_check.get_amount()
         while amount > 1000 and mode == "atm":
             print("Over withdraw limit, enter a valid amount!")
@@ -287,3 +293,15 @@ class Frontend:
         transaction_list = ws.write_trans_summry(transaction_list)
         print("\nTransfer successfully! Go back to main menu!\n")
         self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,use_daily_limit)
+
+
+def main():
+    print("Welcome to bank system!!!!\n")
+    filedata = v.ValidAccountsFile()
+    valid_account_list = filedata.readfile_ValidAccount()
+    transaction_list = []
+    create_acct_list = []
+    use_daily_limit = []
+    current_mode = None  # Not login, mode not start yet
+    front = Frontend()
+    front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list, use_daily_limit)

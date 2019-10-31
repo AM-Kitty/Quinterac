@@ -17,7 +17,7 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            '1','m','2'
+            'login','atm', 'logout'
         ],
         intput_valid_accounts=[
             '1234567'

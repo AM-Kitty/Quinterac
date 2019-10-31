@@ -1,4 +1,3 @@
-
 import frontend.TransactionFile as t
 import frontend.ValidAccountsFile as v
 import frontend.Accountcheck as a
@@ -18,11 +17,11 @@ class Frontend:
         check_list = ["login", "logout", "create account", "delete account", "deposit", "withdraw", "transfer"]
         print(check_list)
         print()
-        try:
-            transaction = input("Please enter your transaction operations:")
+        transaction = input("Please enter your transaction operations:")
+        if transaction.lower() in check_list:
             return transaction
-        except:
-            quit()
+        else:
+            print("\nThis is not a valid transaction operation!")
 
     # allow the user to choose ATM or agent mode
     def mode_check(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
@@ -87,6 +86,7 @@ class Frontend:
             updateFile = v.ValidAccountsFile()
             updateFile.modify_file_ValidAccount(valid_account_list)
             print("\nLog out successfully!")
+            # self.mode_check(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
             return 0
 
     # allow the user to create an account in different modes(agent/ATM)
@@ -101,7 +101,7 @@ class Frontend:
             ws = t.TransactionFile()
             accoun_check = a.AccountCheck()
             # create account in agent mode
-            if mode == "atm":
+            if mode == "agent":
                 account_name = accoun_check.get_account_name()
                 account_number = accoun_check.get_account_number()
                 # check if account number is valid or not
@@ -133,7 +133,7 @@ class Frontend:
             ws = t.TransactionFile()
             accoun_check = a.AccountCheck()
             # delete account only in agent mode
-            if mode == "atm":
+            if mode == "agent":
                 account_name = accoun_check.get_account_name()
                 account_number = accoun_check.get_account_number()
                 # while loop used to check for valid account number
@@ -305,12 +305,15 @@ class Frontend:
 
 
 def main():
-    print("Welcome to bank system!!!!\n")
-    filedata = v.ValidAccountsFile()
-    valid_account_list = filedata.readfile_ValidAccount()
-    transaction_list = []
-    create_acct_list = []
-    use_daily_limit = []
-    current_mode = None  # Not login, mode not start yet
-    front = Frontend()
-    front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list, use_daily_limit)
+    while (True):
+        print("Welcome to bank system!!!!\n")
+        filedata = v.ValidAccountsFile()
+        valid_account_list = filedata.readfile_ValidAccount()
+        transaction_list = []
+        create_acct_list = []
+        use_daily_limit = []
+        current_mode = None  # Not login, mode not start yet
+        front = Frontend()
+        front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list,
+                          use_daily_limit)
+

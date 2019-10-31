@@ -18,11 +18,11 @@ class Frontend:
         check_list = ["login", "logout", "create account", "delete account", "deposit", "withdraw", "transfer"]
         print(check_list)
         print()
-        transaction = input("Please enter your transaction operations:")
-        while transaction.lower() not in check_list:
-            print("\nEnter a valid transaction operation!")
+        try:
             transaction = input("Please enter your transaction operations:")
-        return transaction
+            return transaction
+        except:
+            quit()
 
     # allow the user to choose ATM or agent mode
     def mode_check(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit):

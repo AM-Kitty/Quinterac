@@ -32,14 +32,17 @@ class Frontend:
         print("\nThere are two types of mode you can login:\n")
         print('Enter [atm]: ----> for ATM mode')
         print('Enter [agent]: ----> for Agent or privileged (teller) mode\n')
-        mode_name = input("Which mode do you want to login:")
-        # while loop used to check valid input for mode
-        while mode_name != "atm" and mode_name != "agent":
-            print("\nPlease enter a valid mode!")
+        try:
             mode_name = input("Which mode do you want to login:")
-        print()
-        self.check_trans(self.open_system(), mode_name, transaction_list, valid_account_list, create_acct_list,
-                         use_daily_limit)
+            # while loop used to check valid input for mode
+            while mode_name != "atm" and mode_name != "agent":
+                print("\nPlease enter a valid mode!")
+                mode_name = input("Which mode do you want to login:")
+            print()
+            self.check_trans(self.open_system(), mode_name, transaction_list, valid_account_list, create_acct_list,
+                             use_daily_limit)
+        except EOFError:
+            quit
 
     # select one of the 7 operations, and call the relative function
     def check_trans(self, trans, mode_name, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
@@ -89,7 +92,7 @@ class Frontend:
             valid_account_list.append("0000000")
             updateFile = v.ValidAccountsFile()
             updateFile.modify_file_ValidAccount(valid_account_list)
-            print("\nLog out successfully\n!")
+            print("\nLog out successfully!\n")
             self.check_trans(self.open_system(), None, transaction_list, valid_account_list, create_acct_list,
                              use_daily_limit)
 
@@ -319,4 +322,3 @@ def main():
     front = Frontend()
     front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list,
                       use_daily_limit)
-

@@ -18,15 +18,15 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login','atm','logout'
+            'login','atm','logout','deposit'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed.'
+            'Error! Error prompt for login failed'
         ],
-        expected_output_transactions=[]
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
     helper(
@@ -109,7 +109,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***'],
         expected_tail_of_terminal_output=[
-            'Log out successfully!'
+            'Please enter your transaction operations:'
         ]
     )
 
@@ -140,7 +140,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=[]
     )
-'''
+
     helper(
         capsys=capsys,
         terminal_input=[
@@ -150,11 +150,109 @@ def test_r2(capsys):
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
+            'Error prompt for login failed'
         ],
-        expected_output_transactions=[]
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
-'''
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'deposit'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error! Error prompt for login failed'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'transfer'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'create account'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'delete account'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'login'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Which mode do you want to login:'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'login'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Which mode do you want to login:'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'logout'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed.'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
 def helper(
         capsys,
         terminal_input,

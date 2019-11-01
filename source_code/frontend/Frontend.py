@@ -1,6 +1,7 @@
 import frontend.TransactionFile as t
 import frontend.ValidAccountsFile as v
 import frontend.Accountcheck as a
+import sys
 
 '''
 Class Frontend:
@@ -17,25 +18,31 @@ class Frontend:
         check_list = ["login", "logout", "create account", "delete account", "deposit", "withdraw", "transfer"]
         print(check_list)
         print()
-        transaction = input("Please enter your transaction operations:")
-        if transaction.lower() in check_list:
+        try:
+            transaction = input("Please enter your transaction operations:")
+            while transaction.lower() not in check_list:
+                print("\nEnter a valid transaction operation!")
+                transaction = input("Please enter your transaction operations:")
             return transaction
-        else:
-            print("\nThis is not a valid transaction operation!")
+        except EOFError:
+            quit
 
     # allow the user to choose ATM or agent mode
     def mode_check(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
         print("\nThere are two types of mode you can login:\n")
         print('Enter [atm]: ----> for ATM mode')
         print('Enter [agent]: ----> for Agent or privileged (teller) mode\n')
-        mode_name = input("Which mode do you want to login:")
-        # while loop used to check valid input for mode
-        while mode_name != "atm" and mode_name != "agent":
-            print("\nPlease enter a valid mode!")
+        try:
             mode_name = input("Which mode do you want to login:")
-        print()
-        self.check_trans(self.open_system(), mode_name, transaction_list, valid_account_list, create_acct_list,
-                         use_daily_limit)
+            # while loop used to check valid input for mode
+            while mode_name != "atm" and mode_name != "agent":
+                print("\nPlease enter a valid mode!")
+                mode_name = input("Which mode do you want to login:")
+            print()
+            self.check_trans(self.open_system(), mode_name, transaction_list, valid_account_list, create_acct_list,
+                             use_daily_limit)
+        except EOFError:
+            quit
 
     # select one of the 7 operations, and call the relative function
     def check_trans(self, trans, mode_name, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
@@ -44,7 +51,7 @@ class Frontend:
             self.login(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
         elif trans == "logout":
             transaction_list.append("EOS")
-            self.logout(transaction_list, valid_account_list)
+            self.logout(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
         elif trans == "create account":
             transaction_list.append("NEW")
             self.createacct(transaction_list, mode_name, valid_account_list, create_acct_list, use_daily_limit)
@@ -72,7 +79,7 @@ class Frontend:
             self.mode_check(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
 
     # allow user to logout and issue error prompt
-    def logout(self, transaction_list, valid_account_list):
+    def logout(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
         # can not logout before login
         if transaction_list.count("login") == 0:
             print("\nError prompt for login failed.")
@@ -85,9 +92,9 @@ class Frontend:
             valid_account_list.append("0000000")
             updateFile = v.ValidAccountsFile()
             updateFile.modify_file_ValidAccount(valid_account_list)
-            print("\nLog out successfully!")
-            # self.mode_check(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
-            return 0
+            print("\nLog out successfully!\n")
+            self.check_trans(self.open_system(), None, transaction_list, valid_account_list, create_acct_list,
+                             use_daily_limit)
 
     # allow the user to create an account in different modes(agent/ATM)
     def createacct(self, transaction_list, mode, valid_account_list, create_acct_list, use_daily_limit):
@@ -101,7 +108,7 @@ class Frontend:
             ws = t.TransactionFile()
             accoun_check = a.AccountCheck()
             # create account in agent mode
-            if mode == "agent":
+            if mode == "atm":
                 account_name = accoun_check.get_account_name()
                 account_number = accoun_check.get_account_number()
                 # check if account number is valid or not
@@ -133,7 +140,7 @@ class Frontend:
             ws = t.TransactionFile()
             accoun_check = a.AccountCheck()
             # delete account only in agent mode
-            if mode == "agent":
+            if mode == "atm":
                 account_name = accoun_check.get_account_name()
                 account_number = accoun_check.get_account_number()
                 # while loop used to check for valid account number
@@ -305,15 +312,13 @@ class Frontend:
 
 
 def main():
-    while (True):
-        print("Welcome to bank system!!!!\n")
-        filedata = v.ValidAccountsFile()
-        valid_account_list = filedata.readfile_ValidAccount()
-        transaction_list = []
-        create_acct_list = []
-        use_daily_limit = []
-        current_mode = None  # Not login, mode not start yet
-        front = Frontend()
-        front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list,
-                          use_daily_limit)
-
+    print("Welcome to bank system!!!!\n")
+    filedata = v.ValidAccountsFile()
+    valid_account_list = filedata.readfile_ValidAccount()
+    transaction_list = []
+    create_acct_list = []
+    use_daily_limit = []
+    current_mode = None  # Not login, mode not start yet
+    front = Frontend()
+    front.check_trans(front.open_system(), current_mode, transaction_list, valid_account_list, create_acct_list,
+                      use_daily_limit)

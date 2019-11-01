@@ -4,17 +4,16 @@ import io
 import sys
 import frontend.Frontend as app
 
-path = os.path.dirname(os.path.abspath(__file__))
+#path = os.path.dirname(os.path.abspath(__file__))
 
 
 def test_r2(capsys):
-    """Testing r2. Self-contained (i.e. everything in the code approach)
-    [my favorite - all in one place with the code]
-
+    """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
 
+    '''
     helper(
         capsys=capsys,
         terminal_input=[
@@ -252,6 +251,38 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
+    '''
+    #------------------------Transfer-------------------------------------#
+    #--R1T1--Invalid from number transfer
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '012345'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your account number:'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+    '''
+    # --R1T2--Invalid to number transfer
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', '1234567', '012345'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your account number:'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+    '''
 
 def helper(
         capsys,
@@ -262,25 +293,27 @@ def helper(
 ):
     """Helper function for testing
 
-    Arguments:
-        capsys -- object created by pytest to capture stdout and stderr
-        terminal_input -- list of string for terminal input
-        expected_tail_of_terminal_output list of expected string at the tail of terminal
-        intput_valid_accounts -- list of valid accounts in the valid_account_list_file
-        expected_output_transactions -- list of expected output transactions
+        Arguments:
+            capsys -- object created by pytest to capture stdout and stderr
+            terminal_input -- list of string for terminal input
+            expected_tail_of_terminal_output list of expected string at the tail of terminal
+            intput_valid_accounts -- list of valid accounts in the valid_account_list_file
+            expected_output_transactions -- list of expected output transactions
     """
+
 
     # cleanup package
     reload(app)
 
     # create a temporary file in the system to store output transactions
     # temp_fd, temp_file = tempfile.mkstemp()
-    transaction_summary_file = "TransactionSummaryFile.txt"
-    open(transaction_summary_file, 'w').close()
+    transaction_summary_file = "frontend/TransactionSummaryFile.txt"
+    #open(transaction_summary_file, 'w').close()
 
     # create a temporary file in the system to store the valid accounts:
     # temp_fd2, temp_file2 = tempfile.mkstemp()
     valid_account_list_file = "frontend/ValidAccountListFile.txt"
+
     with open(valid_account_list_file, 'w') as wf:
         wf.write('\n'.join(intput_valid_accounts))
 
@@ -294,7 +327,7 @@ def helper(
     sys.stdin = io.StringIO(
         '\n'.join(terminal_input))
 
-    # run the program
+    # run the Frontend.py
     app.main()
 
     # capture terminal output / errors

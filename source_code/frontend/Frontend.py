@@ -108,7 +108,7 @@ class Frontend:
             ws = t.TransactionFile()
             accoun_check = a.AccountCheck()
             # create account in agent mode
-            if mode == "atm":
+            if mode == "agent":
                 account_name = accoun_check.get_account_name()
                 account_number = accoun_check.get_account_number()
                 # check if account number is valid or not
@@ -140,7 +140,7 @@ class Frontend:
             ws = t.TransactionFile()
             accoun_check = a.AccountCheck()
             # delete account only in agent mode
-            if mode == "atm":
+            if mode == "agent":
                 account_name = accoun_check.get_account_name()
                 account_number = accoun_check.get_account_number()
                 # while loop used to check for valid account number

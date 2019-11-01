@@ -12,21 +12,24 @@ class AccountCheck:
 
     # get the input for account number from user
     def get_account_number(self):
+
         while True:
             account_number = input("Enter your account number:")
             if not account_number.isdigit():
-                print("Please enter a valid digit number!")
+                print("\nPlease enter a valid digit number!")
             elif len(account_number) != 7:
-                print("Please enter a valid account number! (Only 7 digits)")
+                print("\nPlease enter a valid account number! (Only 7 digits)")
             else:
                 if account_number[0] == "0":
-                    print("Account number first digit cannot be zero!")
+                    print("\nAccount number first digit cannot be zero!")
                 try:
                     account_number = int(account_number)
                     if len(str(account_number)) == 7:
                         return account_number
                 except ValueError:
-                    print("Please enter a valid account number!")
+                    print("\nPlease enter a valid account number!")
+
+
 
     # get the input for account name from user
     def get_account_name(self):

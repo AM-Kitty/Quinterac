@@ -202,10 +202,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
-<<<<<<< HEAD
-=======
     # ---------------- R3T2------------------------------#
->>>>>>> fc33900d11f4e0c56aa3d56bdfec6d5fced78512
     # test for logout is not accepted before login
     helper(
         capsys=capsys,
@@ -228,10 +225,6 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
-<<<<<<< HEAD
-
-=======
->>>>>>> fc33900d11f4e0c56aa3d56bdfec6d5fced78512
 
 def helper(
         capsys,

@@ -159,7 +159,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['NEW 1234523 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
-    '''
+
 
 
 def helper(

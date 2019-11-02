@@ -5,10 +5,6 @@ import io
 import sys
 import frontend.Frontend as app
 
-
-# path = os.path.dirname(os.path.abspath(__file__))
-
-
 def test_r2(capsys):
     """
     Arguments:
@@ -16,7 +12,7 @@ def test_r2(capsys):
     """
 
     # ------------------------Withdraw-------------------------------------#
-    # --R1T1--Invalid withdraw account number start with 0-----Successful
+    # --R1T1--Invalid withdraw account number in atm mode start with 0-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -31,7 +27,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R1T2--Invalid withdraw account number not in 7 digits-----Successful
+    # --R1T2--Invalid withdraw account number in atm mode less than 7 digits-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -46,7 +42,37 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R1T3--Invalid withdraw account number not in valid accounts list file-----Successful
+    # --R1T3--Invalid withdraw account number in atm mode more than 7 digits-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '1234567890'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T4--Invalid withdraw account number in atm mode mixed with characters-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '12345ba'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+             'Please enter a valid digit number!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T5--Invalid withdraw account number in atm mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -62,7 +88,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R1T4--Valid withdraw account number in ATM----Successful
+    # --R1T6--Valid withdraw account number in ATM----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -77,7 +103,83 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R1T5--Valid withdraw account number in agent----Successful
+    # --R2T1--Invalid withdraw account number in agent mode start with 0-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '0123456'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Account number first digit cannot be zero!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T3--Invalid withdraw account number in agent mode less than 7 digits-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '12345'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T4--Invalid withdraw account number in agent mode more than 7 digits-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '1234567890'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T5--Invalid withdraw account number in agent mode mixed with characters-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '12345ba'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid digit number!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T6--Invalid withdraw account number in agent mode not in valid accounts list file-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Account not exist! Enter a existed account to withdraw!',
+            'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T7--Valid withdraw account number in agent----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -92,7 +194,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R2T1--ATM withdraw over per time limit----Successful
+    # --R3T1--ATM withdraw over per time limit----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -107,7 +209,22 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R2T2--ATM withdraw within per time limit----Successful
+    # --R3T2--input invalid ATM withdraw money mixed with characters----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '1234567', '200aa@'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:Enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R3T3--ATM withdraw within per time limit----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -127,7 +244,7 @@ def test_r2(capsys):
         expected_output_transactions=['WDR 1234567 10000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-    # --R2T3--ATM withdraw over daily limit----Successful
+    # --R3T4--ATM withdraw over daily limit----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -142,7 +259,7 @@ def test_r2(capsys):
         expected_output_transactions=['WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-    # --R3T1--agent withdraw over limit----Successful
+    # --R4T1--agent withdraw over limit----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -157,7 +274,22 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R3T2--agent withdraw within limit----Successful
+    # --R4T2--input invalid ATM withdraw money mixed with characters----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '1234567', '200aa@'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:Enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R4T3--agent withdraw within limit----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -176,9 +308,6 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['WDR 1234567 50000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
-
-
-
 
 def helper(
         capsys,

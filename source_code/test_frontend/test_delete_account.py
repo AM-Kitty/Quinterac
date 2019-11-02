@@ -41,7 +41,7 @@ def test_r2(capsys):
             'login', 'agent', 'delete account', 'newUser', '1234561', 'logout'
         ],
         intput_valid_accounts=[
-            '1234567', '1234561', '0000000'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter your transaction operations:'
@@ -118,7 +118,8 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
-'''
+    '''
+
 def helper(
         capsys,
         terminal_input,

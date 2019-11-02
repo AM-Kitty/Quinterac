@@ -95,6 +95,8 @@ class Frontend:
             transaction_list = ws.write_trans_summry(transaction_list)
             transaction_list = []
             valid_account_list.append("0000000")
+            if valid_account_list.count("0000000") > 1:
+                valid_account_list.remove("0000000")
             updateFile = v.ValidAccountsFile()
             updateFile.modify_file_ValidAccount(valid_account_list)
             print("\nLog out successfully!\n")

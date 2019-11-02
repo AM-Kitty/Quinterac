@@ -12,117 +12,8 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-
-    # test for logout without login
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'logout'
-        ],
-        intput_valid_accounts=[
-            '1234567','0000000'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed.'
-        ],
-        expected_output_transactions=[]
-    )
-
-    # test for creating account without login
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'create account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    # test for deleting account without login
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'delete account'
-        ],
-        intput_valid_accounts=[
-            '1234567','0000000'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    # test for depositing without login
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'deposit'
-        ],
-        intput_valid_accounts=[
-            '1234567','0000000'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error! Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    # test for withdrawing without login
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'withdraw'
-        ],
-        intput_valid_accounts=[
-            '1234567','0000000'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    # test for transferring without login
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'transfer'
-        ],
-        intput_valid_accounts=[
-            '1234567','0000000'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    # test for login
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login'
-        ],
-        intput_valid_accounts=[
-            '1234567','0000000'
-        ],
-        expected_tail_of_terminal_output=[
-            'Welcome to bank system!!!!', '', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
-            '', 'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
-            'Enter [atm]: ----> for ATM mode',
-            'Enter [agent]: ----> for Agent or privileged (teller) mode', '', 'Which mode do you want to login:'
-        ],
-        expected_output_transactions=[]
-    )
-
-    # test for logout after login
+    #-----------------------logout-------------------------------#
+    # test for logout after login in atm
     helper(
         capsys=capsys,
         terminal_input=[
@@ -139,19 +30,38 @@ def test_r2(capsys):
         ]
     )
 
-    # test for multiple login
+    # test for logout after login in agent
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'login'
+            'login', 'agent', 'logout'
         ],
         intput_valid_accounts=[
-            '1234567','0000000'
+            '1234567', '0000000'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***'],
+        expected_tail_of_terminal_output=[
+            'Log out successfully!', '', 'There are seven transaction operations:',
+            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '',
+            'Please enter your transaction operations:'
+        ]
+    )
+
+    # test for login after logout in atm
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'logout', 'login'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
+            'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
+            'Enter [atm]: ----> for ATM mode', 'Enter [agent]: ----> for Agent or privileged (teller) mode', '',
+            'Which mode do you want to login:'
         ],
-        expected_output_transactions=[]
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
     # test for withdrawing after logout
@@ -225,23 +135,6 @@ def test_r2(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    # test for logging in after logout
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'login'
-        ],
-        intput_valid_accounts=[
-            '1234567','0000000'
-        ],
-        expected_tail_of_terminal_output=[
-            'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
-            'Enter [atm]: ----> for ATM mode', 'Enter [agent]: ----> for Agent or privileged (teller) mode', '',
-            'Which mode do you want to login:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )

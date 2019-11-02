@@ -4,7 +4,8 @@ import io
 import sys
 import frontend.Frontend as app
 
-#path = os.path.dirname(os.path.abspath(__file__))
+
+# path = os.path.dirname(os.path.abspath(__file__))
 
 
 def test_r2(capsys):
@@ -12,7 +13,6 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-
 
     helper(
         capsys=capsys,
@@ -101,6 +101,22 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
+            'login'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Welcome to bank system!!!!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:', 'There are two types of mode you can login:', '', 'Enter [atm]: ----> for ATM mode',
+            'Enter [agent]: ----> for Agent or privileged (teller) mode', '', 'Which mode do you want to login:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
             'login', 'atm', 'logout'
         ],
         intput_valid_accounts=[
@@ -108,7 +124,8 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***'],
         expected_tail_of_terminal_output=[
-            'Please enter your transaction operations:'
+            'Log out successfully!', '', 'There are seven transaction operations:',
+            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
         ]
     )
 
@@ -205,6 +222,8 @@ def test_r2(capsys):
             '1234567'
         ],
         expected_tail_of_terminal_output=[
+            'Please enter your transaction operations:','There are two types of mode you can login:', '',
+            'Enter [atm]: ----> for ATM mode', 'Enter [agent]: ----> for Agent or privileged (teller) mode', '',
             'Which mode do you want to login:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
@@ -239,7 +258,6 @@ def test_r2(capsys):
     )
 
 
-
 def helper(
         capsys,
         terminal_input,
@@ -256,7 +274,6 @@ def helper(
             intput_valid_accounts -- list of valid accounts in the valid_account_list_file
             expected_output_transactions -- list of expected output transactions
     """
-
 
     # cleanup package
     reload(app)
@@ -316,4 +333,3 @@ def helper(
 
         for ind in range(len(content)):
             assert content[ind] == expected_output_transactions[ind]
-

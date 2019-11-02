@@ -11,6 +11,7 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
+    '''
     # ------------------------delete account-------------------------------------#
     # --R1T1--ATM delete mode
     # Cannot delete account in the ATM mode
@@ -117,7 +118,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
-
+'''
 def helper(
         capsys,
         terminal_input,

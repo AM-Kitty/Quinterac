@@ -190,8 +190,8 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
-    '''
-    # test for invalid input operation for logout
+
+    # test for logout is not accepted before login
     helper(
         capsys=capsys,
         terminal_input=[
@@ -203,17 +203,17 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Error prompt for login failed.', 'There are seven transaction operations:',
             "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '',
-            'Please enter your transaction operations:',  'There are two types of mode you can login:', '',
+            'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
             'Enter [atm]: ----> for ATM mode', 'Enter [agent]: ----> for Agent or privileged (teller) mode', '',
             'Which mode do you want to login:', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
-            'Log out successfully!', '', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '',
+            'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
-    '''
+
 
 def helper(
         capsys,

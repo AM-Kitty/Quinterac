@@ -16,7 +16,7 @@ def test_r2(capsys):
 
     # ------------------------Deposit-------------------------------------#
     # --R1T1--invalid number deposit
-    # Cannot deposit if the account number is invalid-fail
+    # Cannot deposit if the account number is invalid with error-pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -32,7 +32,7 @@ def test_r2(capsys):
     )
 
     # --R2T1--ATM deposit above limit
-    # Cannot deposit if the amount limit per deposit in ATM exceeds
+    # Cannot deposit if the amount limit per deposit in ATM exceeds with error-pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -48,7 +48,7 @@ def test_r2(capsys):
     )
 
     # --R2T2--ATM deposit within limit
-    # Deposit within $2,000 per time in ATM-successful
+    # Deposit within $2,000 per time in ATM, successful-pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -66,7 +66,7 @@ def test_r2(capsys):
 
 
     # --R3T1--ATM deposit above daily limit
-    # Cannot deposit if the daily deposit amount exceeds $5,000 for ATM
+    # Cannot deposit if the daily deposit amount exceeds $5,000 for ATM with error-pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -83,7 +83,7 @@ def test_r2(capsys):
     )
 
     # --R3T2--ATM deposit within limit
-    # Deposit within $5,000
+    # Deposit within $5,000 daily successfully - pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -99,9 +99,9 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-    # --R4 T1--Agent withdraws exceeds
-    # Cannot withdrawals if the withdrawals amount
-    # exceeds $999,999.99 in agent mode
+    # --R4 T1--Agent deposit exceeds
+    # Cannot deposit if the withdrawals amount
+    # exceeds $999,999.99 in agent mode with error - pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -116,8 +116,8 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-    # --R4 T2--Withdrawals in agent mode
-    # Withdrawals in agent mode-successful
+    # --R4 T2--Deposit in agent mode
+    # Deposit in agent mode successfully
     helper(
         capsys=capsys,
         terminal_input=[

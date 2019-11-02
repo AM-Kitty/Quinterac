@@ -1,3 +1,4 @@
+
 from importlib import reload
 import os
 import io
@@ -13,13 +14,13 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-
+    '''
     # ------------------------Withdraw-------------------------------------#
-    # --R1T1--Invalid from transfer account number start with 0-----Successful
+    # --R1T1--Invalid withdraw account number start with 0-----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'transfer', '0123456'
+            'login', 'atm', 'withdraw', '0123456'
         ],
         intput_valid_accounts=[
             '1234567'
@@ -27,8 +28,151 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Account number first digit cannot be zero!', 'Enter your account number:'
         ],
-        expected_output_transactions=['']
+        expected_output_transactions=[]
     )
+
+    # --R1T2--Invalid withdraw account number not in 7 digits-----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '12345'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T3--Invalid withdraw account number not in valid accounts list file-----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Account not exist! Enter a existed account to withdraw!',
+            'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T4--Valid withdraw account number in ATM----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '1234567'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T5--Valid withdraw account number in agent----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '1234567'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T1--ATM withdraw over per time limit----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '1234567', '450000000'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Over ATM withdraw per time limit, enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T2--ATM withdraw within per time limit----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '1234567', '100'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Withdraw successfully! Go back to main menu!', '',
+            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:'
+        ],
+        expected_output_transactions=['WDR 1234567 10000 0000000 ***']
+    )
+
+    # --R2T3--ATM withdraw over daily limit----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000','withdraw', '1234567', '1000',
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:Error! Over daily withdraw limit!'
+        ],
+        expected_output_transactions=['WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***']
+    )
+
+    # --R3T1--agent withdraw over limit----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '1234567', '450000000'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Over withdraw limit, enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+    
+
+    # --R3T2--agent withdraw within limit----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'withdraw', '1234567', '500', 'logout'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Withdraw successfully! Go back to main menu!', '',
+            'There are seven transaction operations:',
+            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:'
+        ],
+        expected_output_transactions=['WDR 1234567 50000 0000000 ***']
+    )
+    '''
 
 
 

@@ -44,6 +44,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=[]
     )
+
     '''
     # --R1T3--Invalid from transfer account number not in valid accounts list file-----Failed
     helper(
@@ -106,6 +107,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=[]
     )
+
     '''
     # --R2T3--Invalid to transfer account number not in valid accounts list file-----Failed
     helper(
@@ -175,7 +177,7 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'transfer', '1234567', '7654321', '200'
+            'login', 'atm', 'transfer', '1234567', '7654321', '200', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '7654321'
@@ -183,16 +185,18 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:',
             "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '',
-            'Please enter your transaction operations:'
+            'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['XFR 1234567 20000 7654321 ***']
+        expected_output_transactions=['XFR 1234567 20000 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )
 
     # --R3T3--Multiple transfer over ATM daily amount limit-----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'transfer', '1234567', '7654321', '10000', 'transfer', '1234567', '7654321', '200'
+            'login', 'atm', 'transfer', '1234567', '7654321', '10000', 'logout', 'login', 'atm', 'transfer', '1234567', '7654321', '200'
         ],
         intput_valid_accounts=[
             '1234567', '7654321'
@@ -200,10 +204,10 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Error! Over atm daily transfer limit!'
         ],
-        expected_output_transactions=['XFR 1234567 1000000 7654321 ***']
+        expected_output_transactions=['XFR 1234567 1000000 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-    # --R4T1--Agent transfer over daily amount----Failed
+    # --R4T1--Agent transfer over daily amount----Successful
     helper(
         capsys=capsys,
         terminal_input=[
@@ -218,23 +222,22 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R4T2--Agent transfer within daily amount----Failed
+    # --R4T2--Agent transfer within daily amount----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'transfer', '1234567', '7654321', '999'
+            'login', 'agent', 'transfer', '1234567', '7654321', '999', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '7654321'
         ],
         expected_tail_of_terminal_output=[
-            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
+            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:',
+            'Log out successfully!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['XFR 1234567 99900 7654321 ***']
+        expected_output_transactions=['XFR 1234567 99900 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )
-
-
-
 
 
 def helper(

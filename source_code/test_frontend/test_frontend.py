@@ -129,20 +129,6 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'login'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
-        ],
-        expected_output_transactions=[]
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
             'login', 'atm', 'logout', 'withdraw'
         ],
         intput_valid_accounts=[

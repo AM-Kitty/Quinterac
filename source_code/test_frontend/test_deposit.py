@@ -15,8 +15,8 @@ def test_r2(capsys):
     """
 
     # ------------------------Deposit-------------------------------------#
-    # --R1T1--invalid number deposit
-    # Cannot deposit if the account number is invalid-fail
+    # --R1T1--invalid number deposit start with 0
+    # Cannot deposit if the account number is invalid
     helper(
         capsys=capsys,
         terminal_input=[

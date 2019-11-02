@@ -231,7 +231,7 @@ class Frontend:
         # check if the user enter the valid amount in ATM and agen mode respectively
         amount = accoun_check.get_amount()
         while amount > 1000 and mode == "atm":
-            print("\nOver withdraw limit, enter a valid amount!")
+            print("\nOver ATM withdraw per time limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         while amount > 999999.99 and mode == "agent":
             print("\nOver withdraw limit, enter a valid amount!")

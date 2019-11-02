@@ -31,8 +31,8 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R1T2--agent mode createacct
-    # Can create an account in agent mode
+    # --R1T2--agent mode delete
+    # Can delete an account in agent mode
     # Successfully create account in agent mode - pass
     helper(
         capsys=capsys,

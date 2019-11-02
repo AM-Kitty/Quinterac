@@ -4,7 +4,8 @@ import io
 import sys
 import frontend.Frontend as app
 
-#path = os.path.dirname(os.path.abspath(__file__))
+
+# path = os.path.dirname(os.path.abspath(__file__))
 
 
 def test_r2(capsys):
@@ -13,231 +14,123 @@ def test_r2(capsys):
         capsys -- object created by pytest to capture stdout and stderr
     """
 
-
+    # ------------------------Deposit-------------------------------------#
+    # --R1T1--invalid number deposit
+    # Cannot deposit if the account number is invalid-fail
     helper(
         capsys=capsys,
         terminal_input=[
+            'login', 'atm', 'deposit', '0123456'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Account number first digit cannot be zero!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T1--ATM deposit above limit
+    # Cannot deposit if the amount limit per deposit in ATM exceeds
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '1234567', '3000'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Over deposit limit, enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T2--ATM deposit within limit
+    # Deposit within $2,000 per time in ATM-successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '1234567', '1000', 'logout'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter your transaction operations:'
+        ],
+        expected_output_transactions=['DEP 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
+        #expected_output_transactions=['DEP 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
+    )
+
+
+    # --R3T1--ATM deposit above daily limit
+    # Cannot deposit if the daily deposit amount exceeds $5,000 for ATM
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '1234567', '2000', 'deposit', '1234567', '2000',
+            'logout', 'login', 'atm', 'deposit', '1234567', '2000'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:Error! Over daily deposit limit!'
+        ],
+        expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
+    )
+
+    # --R3T2--ATM deposit within limit
+    # Deposit within $5,000
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '1234567', '2000', 'deposit', '1234567', '2000',
             'logout'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed.'
-        ],
-        expected_output_transactions=[]
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'create account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'delete account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'deposit'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error! Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'withdraw'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'transfer'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=[]
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***'],
-        expected_tail_of_terminal_output=[
             'Please enter your transaction operations:'
-        ]
+        ],
+        expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+    # --R4 T1--Agent withdraws exceeds
+    # Cannot withdrawals if the withdrawals amount
+    # exceeds $999,999.99 in agent mode
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'login'
+            'login', 'agent', 'deposit', '1234567', '100000000'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
+            'Enter your amount:'
         ],
-        expected_output_transactions=[]
+        expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+    # --R4 T2--Withdrawals in agent mode
+    # Withdrawals in agent mode-successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'logout', 'withdraw'
+            'login', 'agent', 'deposit', '1234567', '99999999'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
+            'Enter your amount:'
         ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+        expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***', 'DEP 1234567 99999999 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'deposit'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error! Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'transfer'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'create account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'delete account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'login'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Which mode do you want to login:'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'login'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Which mode do you want to login:'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'logout'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed.'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
 
 
 def helper(
@@ -256,7 +149,6 @@ def helper(
             intput_valid_accounts -- list of valid accounts in the valid_account_list_file
             expected_output_transactions -- list of expected output transactions
     """
-
 
     # cleanup package
     reload(app)

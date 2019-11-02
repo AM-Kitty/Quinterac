@@ -14,7 +14,7 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-    '''
+
     # ------------------------Withdraw-------------------------------------#
     # --R1T1--Invalid withdraw account number start with 0-----Successful
     helper(
@@ -111,7 +111,7 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'withdraw', '1234567', '100'
+            'login', 'atm', 'withdraw', '1234567', '100' , 'logout'
         ],
         intput_valid_accounts=[
             '1234567'
@@ -119,16 +119,19 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Withdraw successfully! Go back to main menu!', '',
             'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:',
+            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['WDR 1234567 10000 0000000 ***']
+        expected_output_transactions=['WDR 1234567 10000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
     # --R2T3--ATM withdraw over daily limit----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000','withdraw', '1234567', '1000',
+            'login', 'atm', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'withdraw', '1234567', '1000', 'logout', 'login', 'atm', 'withdraw', '1234567', '1000',
         ],
         intput_valid_accounts=[
             '1234567'
@@ -136,7 +139,7 @@ def test_r2(capsys):
         expected_tail_of_terminal_output=[
             'Enter your amount:Error! Over daily withdraw limit!'
         ],
-        expected_output_transactions=['WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***']
+        expected_output_transactions=['WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
     # --R3T1--agent withdraw over limit----Successful
@@ -153,7 +156,6 @@ def test_r2(capsys):
         ],
         expected_output_transactions=[]
     )
-    
 
     # --R3T2--agent withdraw within limit----Successful
     helper(
@@ -168,11 +170,13 @@ def test_r2(capsys):
             'Withdraw successfully! Go back to main menu!', '',
             'There are seven transaction operations:',
             "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['WDR 1234567 50000 0000000 ***']
+        expected_output_transactions=['WDR 1234567 50000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
-    '''
+
 
 
 

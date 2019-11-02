@@ -4,7 +4,8 @@ import io
 import sys
 import frontend.Frontend as app
 
-#path = os.path.dirname(os.path.abspath(__file__))
+
+# path = os.path.dirname(os.path.abspath(__file__))
 
 
 def test_r2(capsys):
@@ -13,244 +14,226 @@ def test_r2(capsys):
         capsys -- object created by pytest to capture stdout and stderr
     """
 
-
+    # ------------------------Transfer-------------------------------------#
+    # --R1T1--Invalid from transfer account number start with 0-----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'login','atm','logout','deposit'
+            'login', 'atm', 'transfer', '0123456'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error! Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'create account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
+            'Account number first digit cannot be zero!', 'Enter your account number:'
         ],
         expected_output_transactions=[]
     )
 
+    # --R1T2--Invalid from transfer account number not in 7 digits-----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'delete account'
+            'login', 'atm', 'transfer', '12345'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+    '''
+    # --R1T3--Invalid from transfer account number not in valid accounts list file-----Failed
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Transfer account not existed', 'Enter your account number:'
+        ],
+        expected_output_transactions=['']
+    )
+    '''
+
+    # --R1T3--Invalid from transfer account number not in valid accounts list file-----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your account number:Account not exist! Enter a exist account to transfer!', 'Transfer from ------>',
+            'Enter your account number:'
         ],
         expected_output_transactions=[]
     )
 
+    # --R2T1--Invalid to transfer account number start with 0-----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'deposit'
+            'login', 'atm', 'transfer', '1234567', '0123456'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error! Error prompt for login failed'
+            'Account number first digit cannot be zero!', 'Enter your account number:'
         ],
         expected_output_transactions=[]
     )
 
+    # --R2T2--Invalid to transfer account number not in 7 digits-----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'withdraw'
+            'login', 'atm', 'transfer', '1234567', '12345'
         ],
         intput_valid_accounts=[
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+    '''
+    # --R2T3--Invalid to transfer account number not in valid accounts list file-----Failed
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '1234567', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Transfer account not existed', 'Enter your account number:'
+        ],
+        expected_output_transactions=['']
+    )
+    '''
+
+    # --R2T3--Invalid to transfer account number not in valid accounts list file-----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '1234567', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your account number:Account not exist! Enter a exist account to transfer!', 'Transfer to -------->',
+            'Enter your account number:'
         ],
         expected_output_transactions=[]
     )
 
+    # --R2T4--Both transfer account number are valid----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'transfer'
+            'login', 'atm', 'transfer', '1234567', '7654321'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '7654321'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
+            'Enter your amount:'
         ],
         expected_output_transactions=[]
     )
 
+
+    # --R3T1--ATM transfer over daily amount----Failed
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'logout'
+            'login', 'atm', 'transfer', '1234567', '7654321', '450000000'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '7654321'
         ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***'],
         expected_tail_of_terminal_output=[
+            'Enter your amount:Over ATM transfer daily limit, enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+
+    # --R3T2--ATM transfer within daily amount----Successful
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '1234567', '7654321', '200'
+        ],
+        intput_valid_accounts=[
+            '1234567', '7654321'
+        ],
+        expected_tail_of_terminal_output=[
+            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:',
+            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '',
             'Please enter your transaction operations:'
-        ]
+        ],
+        expected_output_transactions=['XFR 1234567 20000 7654321 ***']
     )
 
+    # --R3T3--Multiple transfer over ATM daily amount limit-----Successful
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'login'
+            'login', 'atm', 'transfer', '1234567', '7654321', '10000', 'transfer', '1234567', '7654321', '200'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '7654321'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
+            'Error! Over atm daily transfer limit!'
+        ],
+        expected_output_transactions=['XFR 1234567 1000000 7654321 ***']
+    )
+
+    # --R4T1--Agent transfer over daily amount----Failed
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer', '1234567', '7654321', '99999999999'
+        ],
+        intput_valid_accounts=[
+            '1234567', '7654321'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:Over agent transfer daily limit, enter a valid amount!', 'Enter your amount:'
         ],
         expected_output_transactions=[]
     )
 
+    # --R4T2--Agent transfer within daily amount----Failed
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'login'
+            'login', 'agent', 'transfer', '1234567', '7654321', '999'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '7654321'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for multiple login.'
+            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
         ],
-        expected_output_transactions=[]
+        expected_output_transactions=['XFR 1234567 99900 7654321 ***']
     )
 
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'withdraw'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
 
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'deposit'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error! Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'transfer'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'create account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'delete account'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'login'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Which mode do you want to login:'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'login'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Which mode do you want to login:'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
-
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'logout', 'logout'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Error prompt for login failed.'
-        ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
-    )
 
 
 
@@ -270,7 +253,6 @@ def helper(
             intput_valid_accounts -- list of valid accounts in the valid_account_list_file
             expected_output_transactions -- list of expected output transactions
     """
-
 
     # cleanup package
     reload(app)

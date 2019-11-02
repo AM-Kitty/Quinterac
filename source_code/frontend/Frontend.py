@@ -196,7 +196,7 @@ class Frontend:
             if mode == "atm":
                 for i in range(len(use_daily_limit)):
                     if use_daily_limit[i][0] == account_number and use_daily_limit[i][1] == "DEP":
-                        exist == True
+                        exist = True
                         use_daily_limit[i][2] += amount
                         if use_daily_limit[i][2] > 5000:
                             print("Error! Over daily deposit limit!")
@@ -204,7 +204,7 @@ class Frontend:
             if exist == False:
                 use_daily_limit.append([account_number, "DEP", amount])
         # add trnasaction operation into transaction summary file
-        transaction_list.append(account_number), transaction_list.append(amount)
+        transaction_list.append(account_number), transaction_list.append(int(amount*100))
         transaction_list = ws.write_trans_summry(transaction_list)
         print("\nDeposit successfully! Go back to main menu!\n")
         self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,
@@ -251,7 +251,7 @@ class Frontend:
                 if exist == False:
                     use_daily_limit.append([account_number, "WDR", amount])
         # add the transaction operation into the transaction summary file
-        transaction_list.append(account_number), transaction_list.append(amount)
+        transaction_list.append(account_number), transaction_list.append(int(amount*100))
         transaction_list = ws.write_trans_summry(transaction_list)
         print("\nWithdraw successfully! Go back to main menu!\n")
         self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,
@@ -266,16 +266,22 @@ class Frontend:
         if transaction_list.count("login") == 0:
             print("\nError prompt for login failed")
             return 1
+
         print("Transfer from ------>")
         account_number1 = accoun_check.get_account_number()
-        print("\nTransfer to -------->")
-        account_number2 = accoun_check.get_account_number()
-        # check if the account numbers are both valid
-        while account_number1 not in valid_account_list and account_number2 not in valid_account_list:
+
+        while account_number1 not in valid_account_list:
+            print("Account not exist! Enter a exist account to transfer!")
             print("Transfer from ------>")
             account_number1 = accoun_check.get_account_number()
-            print("\nTransfer to -------->")
+
+        print("\nTransfer to -------->")
+        account_number2 = accoun_check.get_account_number()
+        while account_number2 not in valid_account_list:
+            print("Account not exist! Enter a exist account to transfer!")
+            print("Transfer to -------->")
             account_number2 = accoun_check.get_account_number()
+
         if account_number1 in create_acct_list or account_number2 in create_acct_list:
             print("\nError! Account just create, cannot do anything!")
             return 1
@@ -283,27 +289,27 @@ class Frontend:
         amount = accoun_check.get_amount()
         # check if the transfer amount is valid in ATM and agent mode respectively
         while amount > 10000 and mode == "atm":
-            print("Over withdraw limit, enter a valid amount!")
+            print("Over ATM transfer daily limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         while amount > 999999.99 and mode == "agent":
-            print("Over withdraw limit, enter a valid amount!")
+            print("Over agent transfer daily limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         exist = False
         if use_daily_limit == [] and mode == "atm":
             use_daily_limit.append([account_number1, "XFR", amount])
         else:
-            if mode == "m":
+            if mode == "atm":
                 for i in range(len(use_daily_limit)):
                     if use_daily_limit[i][0] == account_number1 and use_daily_limit[i][1] == "XFR":
                         exist = True
                         use_daily_limit[i][2] += amount
                         if use_daily_limit[i][2] > 10000:
-                            print("\nError! Over daily transfer limit!")
+                            print("\nError! Over atm daily transfer limit!")
                             return 1
             if exist == False:
                 use_daily_limit.append([account_number1, "XFR", amount])
         # add the transfer transaction operation in to the transaction summary file
-        transaction_list.append(account_number1), transaction_list.append(amount), transaction_list.append(
+        transaction_list.append(account_number1), transaction_list.append(int(amount*100)), transaction_list.append(
             account_number2)
         transaction_list = ws.write_trans_summry(transaction_list)
         print("\nTransfer successfully! Go back to main menu!\n")

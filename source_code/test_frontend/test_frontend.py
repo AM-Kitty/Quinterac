@@ -17,6 +17,19 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
+            'logout'
+        ],
+        intput_valid_accounts=[
+            '1234567'
+        ],
+        expected_tail_of_terminal_output=[
+            'Error prompt for login failed.'
+        ],
+        expected_output_transactions=[]
+    )
+    helper(
+        capsys=capsys,
+        terminal_input=[
             'login','atm','logout','deposit'
         ],
         intput_valid_accounts=[

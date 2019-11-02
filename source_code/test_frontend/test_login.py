@@ -14,6 +14,7 @@ def test_r2(capsys):
     """
     #-----------------Login-----------------------------#
 
+    #---------------- R1T1------------------------------#
     # test for login to the bank
     # Test all terminal output to ensure we have keywords as we want
     helper(
@@ -34,6 +35,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    #---------------- R2T1------------------------------#
     # test for logout without login
     helper(
         capsys=capsys,
@@ -51,6 +53,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    # ---------------- R2T2------------------------------#
     # test for create account without login
     helper(
         capsys=capsys,
@@ -65,7 +68,8 @@ def test_r2(capsys):
         ],
         expected_output_transactions=[]
     )
-
+    
+    # ---------------- R2T3------------------------------#
     # test for delete account without login
     helper(
         capsys=capsys,
@@ -81,6 +85,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    # ---------------- R2T4------------------------------#
     # test for deposit without login
     helper(
         capsys=capsys,
@@ -96,6 +101,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    # ---------------- R2T5------------------------------#
     # test for withdraw without login
     helper(
         capsys=capsys,
@@ -111,6 +117,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    # ---------------- R2T6------------------------------#
     # test for transfer without login
     helper(
         capsys=capsys,
@@ -126,6 +133,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    # ---------------- R3T1------------------------------#
     # test for invalid input operation for login
     helper(
         capsys=capsys,
@@ -141,6 +149,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    # ---------------- R3T2------------------------------#
     # test for input invalid operation mode
     helper(
         capsys=capsys,
@@ -156,6 +165,7 @@ def test_r2(capsys):
         ]
     )
 
+    # ---------------- R3T3------------------------------#
     # test for input valid operation mode for atm
     helper(
         capsys=capsys,
@@ -172,6 +182,7 @@ def test_r2(capsys):
         ]
     )
 
+    # ---------------- R3T4------------------------------#
     # test for input valid operation mode for agent
     helper(
         capsys=capsys,
@@ -189,6 +200,7 @@ def test_r2(capsys):
         ]
     )
 
+    # ---------------- R4T1------------------------------#
     # test for multiple login in atm
     helper(
         capsys=capsys,
@@ -206,6 +218,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+    # ---------------- R4T1------------------------------#
     # test for multiple login in agent
     helper(
         capsys=capsys,

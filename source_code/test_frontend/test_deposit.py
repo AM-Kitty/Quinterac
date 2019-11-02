@@ -23,7 +23,7 @@ def test_r2(capsys):
             'login', 'atm', 'deposit', '0123456'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Account number first digit cannot be zero!', 'Enter your account number:'
@@ -39,7 +39,7 @@ def test_r2(capsys):
             'login', 'atm', 'deposit', '1234567', '3000'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Over deposit limit, enter a valid amount!', 'Enter your amount:'
@@ -55,7 +55,7 @@ def test_r2(capsys):
             'login', 'atm', 'deposit', '1234567', '1000', 'logout'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter your transaction operations:'
@@ -74,7 +74,7 @@ def test_r2(capsys):
             'logout', 'login', 'atm', 'deposit', '1234567', '2000'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your amount:Error! Over daily deposit limit!'
@@ -91,7 +91,7 @@ def test_r2(capsys):
             'logout'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter your transaction operations:'
@@ -108,7 +108,7 @@ def test_r2(capsys):
             'login', 'agent', 'deposit', '1234567', '100000000'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your amount:'
@@ -124,7 +124,7 @@ def test_r2(capsys):
             'login', 'agent', 'deposit', '1234567', '99999999'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your amount:'

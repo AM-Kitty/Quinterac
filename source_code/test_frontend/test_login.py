@@ -15,6 +15,7 @@ def test_r2(capsys):
     #-----------------Login-----------------------------#
 
     # test for login to the bank
+    # Test all terminal output to ensure we have keywords as we want
     helper(
         capsys=capsys,
         terminal_input=[

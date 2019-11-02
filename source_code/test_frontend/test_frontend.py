@@ -20,7 +20,7 @@ def test_r2(capsys):
             'logout'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed.'
@@ -50,7 +50,7 @@ def test_r2(capsys):
             'delete account'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
@@ -65,7 +65,7 @@ def test_r2(capsys):
             'deposit'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error! Error prompt for login failed'
@@ -80,7 +80,7 @@ def test_r2(capsys):
             'withdraw'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
@@ -95,7 +95,7 @@ def test_r2(capsys):
             'transfer'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
@@ -110,7 +110,7 @@ def test_r2(capsys):
             'login'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Welcome to bank system!!!!', '', 'There are seven transaction operations:',
@@ -129,7 +129,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***'],
         expected_tail_of_terminal_output=[
@@ -146,7 +146,7 @@ def test_r2(capsys):
             'login', 'atm', 'login'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for multiple login.'
@@ -161,7 +161,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout', 'withdraw'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
@@ -176,7 +176,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout', 'deposit'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error! Error prompt for login failed'
@@ -191,7 +191,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout', 'transfer'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
@@ -206,7 +206,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout', 'create account'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
@@ -221,7 +221,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout', 'delete account'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed'
@@ -236,7 +236,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout', 'login'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
@@ -253,7 +253,7 @@ def test_r2(capsys):
             'login', 'atm', 'logout', 'logout'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed.'

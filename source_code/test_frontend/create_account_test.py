@@ -1,3 +1,4 @@
+
 from importlib import reload
 import os
 import io
@@ -11,6 +12,7 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
+    '''
     # ------------------------create account-------------------------------------#
     # --R1T1--ATM mode createacct
     # Cannot create account in the ATM mode
@@ -148,7 +150,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['NEW 1234523 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
-
+    '''
 
 
 def helper(

@@ -48,7 +48,10 @@ class Frontend:
     def check_trans(self, trans, mode_name, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
         if trans == "login":
             transaction_list.append(trans)
-            self.login(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
+            if mode_name != None:
+                self.login(transaction_list, valid_account_list, create_acct_list, use_daily_limit, mode_name)
+            else:
+                self.login(transaction_list, valid_account_list, create_acct_list, use_daily_limit, None)
         elif trans == "logout":
             transaction_list.append("EOS")
             self.logout(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
@@ -69,12 +72,13 @@ class Frontend:
             self.transfer(transaction_list, mode_name, valid_account_list, create_acct_list, use_daily_limit)
 
     # allow user to login and issue error prompt
-    def login(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit):
+    def login(self, transaction_list, valid_account_list, create_acct_list, use_daily_limit, mode):
         # check if multiple login or not
         if transaction_list.count("login") > 1:
             print("\nError prompt for multiple login.")
             transaction_list.remove("login")
-            return 1
+            self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,
+                             use_daily_limit)
         else:
             self.mode_check(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
 
@@ -83,7 +87,8 @@ class Frontend:
         # can not logout before login
         if transaction_list.count("login") == 0:
             print("\nError prompt for login failed.")
-            return 1
+            self.check_trans(self.open_system(), None, transaction_list, valid_account_list, create_acct_list,
+                             use_daily_limit)
         else:
             # get transaction file from TransactionFile class
             ws = t.TransactionFile()  # construct a new instance for transaction file

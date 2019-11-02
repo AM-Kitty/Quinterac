@@ -12,6 +12,7 @@ def test_r2(capsys):
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
+
     #-----------------------logout-------------------------------#
     # test for logout after login in atm
     helper(
@@ -52,6 +53,23 @@ def test_r2(capsys):
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'logout', 'login'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
+            'Enter [atm]: ----> for ATM mode', 'Enter [agent]: ----> for Agent or privileged (teller) mode', '',
+            'Which mode do you want to login:'
+        ],
+        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+    )
+
+    # test for login after logout in agent
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'logout', 'login'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -149,7 +167,9 @@ def test_r2(capsys):
             '1234567','0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed.'
+            'Error prompt for login failed.', 'There are seven transaction operations:',
+            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )

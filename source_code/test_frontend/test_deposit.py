@@ -367,12 +367,10 @@ def helper(
     # create a temporary file in the system to store output transactions
     temp_fd, temp_file = tempfile.mkstemp()
     transaction_summary_file = temp_file
-    open(transaction_summary_file, 'w').close()
 
     # create a temporary file in the system to store the valid accounts:
     temp_fd2, temp_file2 = tempfile.mkstemp()
     valid_account_list_file = temp_file2
-
     with open(valid_account_list_file, 'w') as wf:
         wf.write('\n'.join(intput_valid_accounts))
 
@@ -386,7 +384,7 @@ def helper(
     sys.stdin = io.StringIO(
         '\n'.join(terminal_input))
 
-    # run the Frontend.py
+    # run the program
     app.main()
 
     # capture terminal output / errors
@@ -421,4 +419,8 @@ def helper(
 
         for ind in range(len(content)):
             assert content[ind] == expected_output_transactions[ind]
+
+    # clean up
+    os.close(temp_fd)
+    os.remove(temp_file)
 

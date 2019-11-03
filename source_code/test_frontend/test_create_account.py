@@ -28,7 +28,7 @@ def test_R1T1(capsys):
             'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+        expected_output_transactions=[]
     )
 
 def test_R1T2(capsys):
@@ -38,7 +38,8 @@ def test_R1T2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'createacct', 'newUser', '3333444', 'logout'
+            'login', 'agent', 'createacct', 'newUser', '3333444', 'logout',
+            'login', 'agent', 'deleteacct', 'newUser', '3333444', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -46,7 +47,8 @@ def test_R1T2(capsys):
         expected_tail_of_terminal_output=[
             'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['NEW 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
+        expected_output_transactions=['NEW 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***',
+                                      'DEL 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
 def test_R2(capsys):
@@ -64,8 +66,9 @@ def test_R2(capsys):
         expected_tail_of_terminal_output=[
             'Enter your account number:'
         ],
-        expected_output_transactions=['NEW 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
+        expected_output_transactions=[]
     )
+
 
 def test_R2T2(capsys):
     # --R2T2--over create
@@ -85,6 +88,7 @@ def test_R2T2(capsys):
         ],
         expected_output_transactions=['NEW 2333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
+
 
 def test_R2T3(capsys):
     # --R2T3--invalid name create with less than 3 letters
@@ -119,8 +123,10 @@ def test_R2T4(capsys):
         expected_tail_of_terminal_output=[
             'Enter your account name:'
         ],
-        expected_output_transactions=['NEW 2333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
+        expected_output_transactions=[]
     )
+
+
 
 def test_R2T5(capsys):
     # --R2T5--invalid name create with space in the beginning or end
@@ -140,21 +146,23 @@ def test_R2T5(capsys):
         expected_output_transactions=[]
     )
 
+    
 def test_R2T6(capsys):
     # --R2T6--valid name create within space in the name
     # can create account name containing space-successfully created
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'createacct', 'a b c', '1234563'
+            'login', 'agent', 'createacct', 'a b c', '1234563', 'logout',
+            'login', 'agent', 'deleteacct', 'a b c', '1234563', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Create an account successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
+            'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['NEW 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
+        expected_output_transactions=['NEW 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***', 'DEL 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
     )
 
 def test_R3T1(capsys):
@@ -164,6 +172,7 @@ def test_R3T1(capsys):
         capsys=capsys,
         terminal_input=[
             'login', 'agent', 'createacct', 'newUser', '1234522', 'logout', 'login', 'agent', 'deposit', '1234522'
+
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -172,6 +181,20 @@ def test_R3T1(capsys):
             'Error! Account just create, cannot do anything!'
         ],
         expected_output_transactions=['NEW 1234522 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deleteacct', 'newUser', '1234522', 'logout'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter your transaction operations:'
+        ],
+        expected_output_transactions=['DEL 1234522 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
 def test_R3T2(capsys):
@@ -191,7 +214,20 @@ def test_R3T2(capsys):
         expected_output_transactions=['NEW 1234523 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
-
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deleteacct', 'newUser', '1234523', 'logout'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter your transaction operations:'
+        ],
+        expected_output_transactions=['DEL 1234523 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
+    )
+    
 def helper(
         capsys,
         terminal_input,

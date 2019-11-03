@@ -15,7 +15,7 @@ def test_r2(capsys):
     """
 
     # ------------------------Deposit-------------------------------------#
-    # --R1T1--invalid number deposit
+    # --R1T1--deposit with invalid number (beginning with 0) in atm mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
         capsys=capsys,
@@ -27,6 +27,118 @@ def test_r2(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Account number first digit cannot be zero!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T2--deposit with invalid number (less than 7) in atm mode
+    # Cannot deposit if the account number is invalid with error-pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '123456'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T3--deposit with invalid number (larger than 7) in atm mode
+    # Cannot deposit if the account number is invalid with error-pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '12345678'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T4--deposit with invalid number (having letters and symbols other than number) in atm mode
+    # Cannot deposit if the account number is invalid with error-pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '1234sa7'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid digit number!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T5--deposit with invalid number (beginning with 0) in agent mode
+    # Cannot deposit if the account number is invalid with error-pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deposit', '0123456'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Account number first digit cannot be zero!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T6--deposit with invalid number (less than 7) in agent mode
+    # Cannot deposit if the account number is invalid with error-pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deposit', '123456'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T7--deposit with invalid number (larger than 7) in agent mode
+    # Cannot deposit if the account number is invalid with error-pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deposit', '12345678'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T4--deposit with invalid number (having letters and symbols other than number) in agent mode
+    # Cannot deposit if the account number is invalid with error-pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deposit', '1234sa7'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid digit number!', 'Enter your account number:'
         ],
         expected_output_transactions=[]
     )
@@ -99,6 +211,22 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+    # --R3 T3--Deposit with invalid amount(with letter or symbol) in atm mode
+    # error prompt deposit with invalid amount
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '1234567', '99f9'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:Enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
     # --R4 T1--Agent deposit exceeds
     # Cannot deposit if the withdrawals amount
     # exceeds $999,999.99 in agent mode with error - pass
@@ -121,16 +249,81 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'deposit', '1234567', '99999999'
+            'login', 'agent', 'deposit', '1234567', '999999.99', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:'
+            'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***', 'DEP 1234567 99999999 0000000 ***', 'EOS 0000000 000 0000000 ***']
+        expected_output_transactions=['DEP 1234567 99999999 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
+
+    # --R4 T3--Deposit in agent mode
+    # Deposit in agent mode successfully
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deposit', '1234567', '999999.99', 'logout'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter your transaction operations:'
+        ],
+        expected_output_transactions=['DEP 1234567 99999999 0000000 ***', 'EOS 0000000 000 0000000 ***']
+    )
+
+    # --R4 T4--Deposit with invalid amount(with letter or symbol) in agent mode
+    # error prompt deposit with invalid amount
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deposit', '1234567', '99f9'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your amount:Enter a valid amount!', 'Enter your amount:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R5 T1--Deposit on a deleted or Non-existent account in agent mode
+    # error prompt for non existent account
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'deposit', '1234565'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+             'Account not exist! Enter a exist account to deposit!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R5 T2--Deposit on a deleted or Non-existent account in atm mode
+    # error prompt for non existent account
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'deposit', '1234565'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+             'Account not exist! Enter a exist account to deposit!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
 
 
 def helper(

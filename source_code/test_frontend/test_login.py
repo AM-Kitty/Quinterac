@@ -1,10 +1,11 @@
 from importlib import reload
 import io
 import sys
+import os
 import frontend.Frontend as app
 
 
-# path = os.path.dirname(os.path.abspath(__file__))
+path = os.path.dirname(os.path.abspath(__file__))
 
 
 def test_R1T1(capsys):

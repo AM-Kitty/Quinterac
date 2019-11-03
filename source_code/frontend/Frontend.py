@@ -15,7 +15,7 @@ class Frontend:
         print("There are seven transaction operations:")
 
         # while loop used to check valid input for number selction of operation
-        check_list = ["login", "logout", "create account", "delete account", "deposit", "withdraw", "transfer"]
+        check_list = ["login", "logout", "createacct", "deleteacct", "deposit", "withdraw", "transfer"]
         print(check_list)
         print()
         try:
@@ -55,10 +55,10 @@ class Frontend:
         elif trans == "logout":
             transaction_list.append("EOS")
             self.logout(transaction_list, valid_account_list, create_acct_list, use_daily_limit)
-        elif trans == "create account":
+        elif trans == "createacct":
             transaction_list.append("NEW")
             self.createacct(transaction_list, mode_name, valid_account_list, create_acct_list, use_daily_limit)
-        elif trans == "delete account":
+        elif trans == "deleteacct":
             transaction_list.append("DEL")
             self.deleteacct(transaction_list, mode_name, valid_account_list, create_acct_list, use_daily_limit)
         elif trans == "deposit":

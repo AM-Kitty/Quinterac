@@ -4,7 +4,7 @@ import io
 import sys
 import frontend.Frontend as app
 
-def test_r2(capsys):
+def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
@@ -26,6 +26,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T2(capsys):
     # --R1T2--Invalid from transfer account number in atm mode not in 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -41,6 +42,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T3_1(capsys):
     '''
     # --R1T3--Invalid from transfer account number not in valid accounts list file-----Failed
     helper(
@@ -58,6 +60,7 @@ def test_r2(capsys):
     )
     '''
 
+def test_R1T3(capsys):
     # --R1T3--Invalid from transfer account number in atm mode mixed with characters-----Pass
     helper(
         capsys=capsys,
@@ -73,6 +76,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T4(capsys):
     # --R1T4--Invalid from transfer account number in atm mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
@@ -89,6 +93,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T1(capsys):
     # --R2T1--Invalid to transfer account number in atm mode start with 0-----Pass
     helper(
         capsys=capsys,
@@ -104,6 +109,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T2(capsys):
     # --R2T2--Invalid to transfer account number in atm mode not in 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -118,6 +124,8 @@ def test_r2(capsys):
         ],
         expected_output_transactions=[]
     )
+
+def test_R2T3(capsys):
 
     '''
     # --R2T3--Invalid to transfer account number not in valid accounts list file-----Failed
@@ -136,6 +144,7 @@ def test_r2(capsys):
     )
     '''
 
+def test_R2T3(capsys):
     # --R2T3--Invalid to transfer account number in atm mode mixed with characters-----Pass
     helper(
         capsys=capsys,
@@ -151,6 +160,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T4(capsys):
     # --R2T4--Invalid to transfer account number in atm mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
@@ -167,6 +177,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T1(capsys):
     # --R3T1--Invalid from transfer account number in agent mode start with 0-----Pass
     helper(
         capsys=capsys,
@@ -182,6 +193,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T2(capsys):
     # --R3T2--Invalid from transfer account number in agent mode not in 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -197,6 +209,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T3(capsys):
     # --R3T3--Invalid from transfer account number in agent mode mixed with characters-----Pass
     helper(
         capsys=capsys,
@@ -212,6 +225,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T4(capsys):
     # --R3T4--Invalid from transfer account number in agent mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
@@ -227,6 +241,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R4T1(capsys):
     # --R4T1--Invalid to transfer account number in agent mode start with 0-----Pass
     helper(
         capsys=capsys,
@@ -242,6 +257,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R4T2(capsys):
     # --R4T2--Invalid to transfer account number in agent mode not in 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -257,6 +273,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R4T3(capsys):
     # --R4T3--Invalid to transfer account number in agent mode mixed with characters-----Pass
     helper(
         capsys=capsys,
@@ -272,6 +289,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R4T4(capsys):
     # --R4T4--Invalid to transfer account number in agent mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
@@ -288,6 +306,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R5T1(capsys):
     # --R5T1--ATM transfer over daily amount----Failed
     helper(
         capsys=capsys,
@@ -303,6 +322,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R5T2(capsys):
     # --R5T2--ATM transfer within daily amount----Pass
     helper(
         capsys=capsys,
@@ -314,14 +334,15 @@ def test_r2(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '',
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '',
             'Please enter your transaction operations:', 'Log out successfully!', '',
-            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['XFR 1234567 20000 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R5T3(capsys):
     # --R5T3--Multiple transfer over ATM daily amount limit-----Pass
     helper(
         capsys=capsys,
@@ -337,6 +358,7 @@ def test_r2(capsys):
         expected_output_transactions=['XFR 1234567 1000000 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R6T1(capsys):
     # --R6T1--Agent transfer over daily amount----Pass
     helper(
         capsys=capsys,
@@ -352,6 +374,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R6T2(capsys):
     # --R6T2--Agent transfer within daily amount----Pass
     helper(
         capsys=capsys,
@@ -362,8 +385,8 @@ def test_r2(capsys):
             '1234567', '7654321'
         ],
         expected_tail_of_terminal_output=[
-            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:',
-            'Log out successfully!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:',
+            'Log out successfully!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['XFR 1234567 99900 7654321 ***', 'EOS 0000000 000 0000000 ***']

@@ -7,12 +7,11 @@ import frontend.Frontend as app
 
 # path = os.path.dirname(os.path.abspath(__file__))
 
-def test_r2(capsys):
+def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-    '''
     # ------------------------create account-------------------------------------#
     # --R1T1--ATM mode createacct
     # Cannot create account in the ATM mode
@@ -20,25 +19,26 @@ def test_r2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'create account'
+            'login', 'atm', 'createacct'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
-    # --R1T2--agent mode createacct
+def test_R1T2(capsys):
+    # --R1T2--agent mode create account
     # Can create an account in agent mode
     # Successfully create account in agent mode - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '3333444', 'logout'
+            'login', 'agent', 'createacct', 'newUser', '3333444', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -49,14 +49,14 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
-
+def test_R2(capsys):
     # --R2T1--invalid number create
     # Cannot create an account number beginning with 0
     # Error prompt for account number beginning with 0 - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '0333444'
+            'login', 'agent', 'createacct', 'newUser', '0333444'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -67,14 +67,15 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T2(capsys):
     # --R2T2--over create
     # Cannot have same account number with exist account
     # Error prompt for account number with the same account number - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '2333444', 'logout',
-            'login', 'agent', 'create account', 'newUser', '2333444'
+            'login', 'agent', 'createacct', 'newUser', '2333444', 'logout',
+            'login', 'agent', 'createacct', 'newUser', '2333444'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -85,13 +86,14 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 2333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T3(capsys):
     # --R2T3--invalid name create with less than 3 letters
     # Cannot create the account if the name character number is less than 3
     # EError prompt for invalid account name not over 3 characters - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'te'
+            'login', 'agent', 'createacct', 'te'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -102,13 +104,14 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 2333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T4(capsys):
     # --R2T4--invalid name create with over 30 letters
     # Cannot create the account if the name character number is larger than 30
     # EError prompt for invalid account name not over 3 characters - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'abcdefghijklmnopqrstuvwxyzqwert'
+            'login', 'agent', 'createacct', 'abcdefghijklmnopqrstuvwxyzqwert'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -119,13 +122,14 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 2333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T5(capsys):
     # --R2T5--invalid name create with space in the beginning or end
     # Cannot create the account if the name contains space in the beginning or end
     # Error prompt for name with space in the beginning or end - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', ' abc '
+            'login', 'agent', 'createacct', ' abc '
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -136,28 +140,30 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T6(capsys):
     # --R2T6--valid name create within space in the name
     # can create account name containing space-successfully created
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'a b c', '1234563'
+            'login', 'agent', 'createacct', 'a b c', '1234563'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Create an account successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
+            'Create an account successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['NEW 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R3T1(capsys):
     # ------------------------create account-------------------------------------#
     # --R3T1--new account, can not do other transactions in agent mode - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '1234522', 'logout', 'login', 'agent', 'deposit', '1234522'
+            'login', 'agent', 'createacct', 'newUser', '1234522', 'logout', 'login', 'agent', 'deposit', '1234522'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -168,12 +174,13 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 1234522 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R3T2(capsys):
     # ------------------------create account-------------------------------------#
     # --R3T2--in agent mode, new account, can not do other transactions in atm mode - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '1234523', 'logout', 'login', 'atm', 'deposit', '1234523'
+            'login', 'agent', 'createacct', 'newUser', '1234523', 'logout', 'login', 'atm', 'deposit', '1234523'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -183,7 +190,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=['NEW 1234523 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
-    '''
+
 
 def helper(
         capsys,

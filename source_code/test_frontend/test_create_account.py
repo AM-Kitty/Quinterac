@@ -6,11 +6,7 @@ import sys
 import frontend.Frontend as app
 
 # path = os.path.dirname(os.path.abspath(__file__))
-<<<<<<< HEAD
-'''
-=======
 
->>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
 def test_R1T1(capsys):
     """
     Arguments:
@@ -36,11 +32,7 @@ def test_R1T1(capsys):
     )
 
 def test_R1T2(capsys):
-<<<<<<< HEAD
-    # --R1T2--agent mode createacct
-=======
     # --R1T2--agent mode create account
->>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
     # Can create an account in agent mode
     # Successfully create account in agent mode - pass
     helper(
@@ -198,11 +190,7 @@ def test_R3T2(capsys):
         ],
         expected_output_transactions=['NEW 1234523 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
-<<<<<<< HEAD
-'''
-=======
 
->>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
 
 def helper(
         capsys,

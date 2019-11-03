@@ -5,11 +5,7 @@ import sys
 import frontend.Frontend as app
 
 # path = os.path.dirname(os.path.abspath(__file__))
-<<<<<<< HEAD
-'''
-=======
 
->>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
 def test_R1T1(capsys):
     """
     Arguments:
@@ -182,7 +178,7 @@ def test_R3T3(capsys):
         ],
         expected_output_transactions=[]
     )
-'''
+
 def helper(
         capsys,
         terminal_input,

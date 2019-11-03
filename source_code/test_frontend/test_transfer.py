@@ -4,10 +4,6 @@ import io
 import sys
 import frontend.Frontend as app
 
-
-# path = os.path.dirname(os.path.abspath(__file__))
-
-
 def test_r2(capsys):
     """
     Arguments:
@@ -15,14 +11,14 @@ def test_r2(capsys):
     """
 
     # ------------------------Transfer-------------------------------------#
-    # --R1T1--Invalid from transfer account number start with 0-----Successful
+    # --R1T1--Invalid from transfer account number in atm mode start with 0-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '0123456'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Account number first digit cannot be zero!', 'Enter your account number:'
@@ -30,14 +26,14 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R1T2--Invalid from transfer account number not in 7 digits-----Successful
+    # --R1T2--Invalid from transfer account number in atm mode not in 7 digits-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '12345'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
@@ -62,14 +58,29 @@ def test_r2(capsys):
     )
     '''
 
-    # --R1T3--Invalid from transfer account number not in valid accounts list file-----Successful
+    # --R1T3--Invalid from transfer account number in atm mode mixed with characters-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '12345b@'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid digit number!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R1T4--Invalid from transfer account number in atm mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '8888888'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your account number:Account not exist! Enter a exist account to transfer!', 'Transfer from ------>',
@@ -78,14 +89,14 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R2T1--Invalid to transfer account number start with 0-----Successful
+    # --R2T1--Invalid to transfer account number in atm mode start with 0-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '1234567', '0123456'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Account number first digit cannot be zero!', 'Enter your account number:'
@@ -93,14 +104,14 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R2T2--Invalid to transfer account number not in 7 digits-----Successful
+    # --R2T2--Invalid to transfer account number in atm mode not in 7 digits-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '1234567', '12345'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
@@ -125,14 +136,29 @@ def test_r2(capsys):
     )
     '''
 
-    # --R2T3--Invalid to transfer account number not in valid accounts list file-----Successful
+    # --R2T3--Invalid to transfer account number in atm mode mixed with characters-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'atm', 'transfer', '1234567', '12345a@'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid digit number!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R2T4--Invalid to transfer account number in atm mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '1234567', '8888888'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your account number:Account not exist! Enter a exist account to transfer!', 'Transfer to -------->',
@@ -141,30 +167,135 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R2T4--Both transfer account number are valid----Successful
+    # --R3T1--Invalid from transfer account number in agent mode start with 0-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'transfer', '1234567', '7654321'
+            'login', 'agent', 'transfer', '0123456'
         ],
         intput_valid_accounts=[
-            '1234567', '7654321'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:'
+            'Account number first digit cannot be zero!', 'Enter your account number:'
         ],
         expected_output_transactions=[]
     )
 
+    # --R3T2--Invalid from transfer account number in agent mode not in 7 digits-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer',  '12345'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
 
-    # --R3T1--ATM transfer over daily amount----Failed
+    # --R3T3--Invalid from transfer account number in agent mode mixed with characters-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer', '12345a@'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid digit number!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R3T4--Invalid from transfer account number in agent mode not in valid accounts list file-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your account number:Account not exist! Enter a exist account to transfer!', 'Transfer from ------>', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R4T1--Invalid to transfer account number in agent mode start with 0-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer', '1234567', '0123456'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Account number first digit cannot be zero!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R4T2--Invalid to transfer account number in agent mode not in 7 digits-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer', '1234567', '12345'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R4T3--Invalid to transfer account number in agent mode mixed with characters-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer', '1234567', '12345a@'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Please enter a valid digit number!', 'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R4T4--Invalid to transfer account number in agent mode not in valid accounts list file-----Pass
+    helper(
+        capsys=capsys,
+        terminal_input=[
+            'login', 'agent', 'transfer', '1234567', '8888888'
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+            'Enter your account number:Account not exist! Enter a exist account to transfer!', 'Transfer to -------->',
+            'Enter your account number:'
+        ],
+        expected_output_transactions=[]
+    )
+
+    # --R5T1--ATM transfer over daily amount----Failed
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '1234567', '7654321', '450000000'
         ],
         intput_valid_accounts=[
-            '1234567', '7654321'
+            '1234567', '7654321', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your amount:Over ATM transfer daily limit, enter a valid amount!', 'Enter your amount:'
@@ -172,8 +303,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-
-    # --R3T2--ATM transfer within daily amount----Successful
+    # --R5T2--ATM transfer within daily amount----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -192,7 +322,7 @@ def test_r2(capsys):
         expected_output_transactions=['XFR 1234567 20000 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-    # --R3T3--Multiple transfer over ATM daily amount limit-----Successful
+    # --R5T3--Multiple transfer over ATM daily amount limit-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -207,7 +337,7 @@ def test_r2(capsys):
         expected_output_transactions=['XFR 1234567 1000000 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-    # --R4T1--Agent transfer over daily amount----Successful
+    # --R6T1--Agent transfer over daily amount----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -222,7 +352,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
-    # --R4T2--Agent transfer within daily amount----Successful
+    # --R6T2--Agent transfer within daily amount----Pass
     helper(
         capsys=capsys,
         terminal_input=[

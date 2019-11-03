@@ -5,7 +5,7 @@ import io
 import sys
 import frontend.Frontend as app
 
-def test_r2(capsys):
+def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
@@ -27,6 +27,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T2(capsys):
     # --R1T2--Invalid withdraw account number in atm mode less than 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -42,6 +43,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T3(capsys):
     # --R1T3--Invalid withdraw account number in atm mode more than 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -57,6 +59,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T4(capsys):
     # --R1T4--Invalid withdraw account number in atm mode mixed with characters-----Pass
     helper(
         capsys=capsys,
@@ -72,6 +75,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T5(capsys):
     # --R1T5--Invalid withdraw account number in atm mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
@@ -88,6 +92,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T6(capsys):
     # --R1T6--Valid withdraw account number in ATM----Pass
     helper(
         capsys=capsys,
@@ -103,6 +108,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T1(capsys):
     # --R2T1--Invalid withdraw account number in agent mode start with 0-----Pass
     helper(
         capsys=capsys,
@@ -118,6 +124,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T3(capsys):
     # --R2T3--Invalid withdraw account number in agent mode less than 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -133,6 +140,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T4(capsys):
     # --R2T4--Invalid withdraw account number in agent mode more than 7 digits-----Pass
     helper(
         capsys=capsys,
@@ -148,6 +156,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T5(capsys):
     # --R2T5--Invalid withdraw account number in agent mode mixed with characters-----Pass
     helper(
         capsys=capsys,
@@ -163,6 +172,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T6(capsys):
     # --R2T6--Invalid withdraw account number in agent mode not in valid accounts list file-----Pass
     helper(
         capsys=capsys,
@@ -179,6 +189,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T7(capsys):
     # --R2T7--Valid withdraw account number in agent----Pass
     helper(
         capsys=capsys,
@@ -194,6 +205,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T1(capsys):
     # --R3T1--ATM withdraw over per time limit----Pass
     helper(
         capsys=capsys,
@@ -209,6 +221,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T2(capsys):
     # --R3T2--input invalid ATM withdraw money mixed with characters----Pass
     helper(
         capsys=capsys,
@@ -224,6 +237,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T3(capsys):
     # --R3T3--ATM withdraw within per time limit----Pass
     helper(
         capsys=capsys,
@@ -244,6 +258,7 @@ def test_r2(capsys):
         expected_output_transactions=['WDR 1234567 10000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R3T4(capsys):
     # --R3T4--ATM withdraw over daily limit----Pass
     helper(
         capsys=capsys,
@@ -259,6 +274,7 @@ def test_r2(capsys):
         expected_output_transactions=['WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'WDR 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R4T1(capsys):
     # --R4T1--agent withdraw over limit----Pass
     helper(
         capsys=capsys,
@@ -274,6 +290,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R4T2(capsys):
     # --R4T2--input invalid ATM withdraw money mixed with characters----Pass
     helper(
         capsys=capsys,
@@ -289,6 +306,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R4T3(capsys):
     # --R4T3--agent withdraw within limit----Pass
     helper(
         capsys=capsys,

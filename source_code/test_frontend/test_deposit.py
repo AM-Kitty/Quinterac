@@ -8,7 +8,7 @@ import frontend.Frontend as app
 # path = os.path.dirname(os.path.abspath(__file__))
 
 
-def test_r2(capsys):
+def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
@@ -31,6 +31,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T2(capsys):
     # --R1T2--deposit with invalid number (less than 7) in atm mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
@@ -47,6 +48,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T3(capsys):
     # --R1T3--deposit with invalid number (larger than 7) in atm mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
@@ -63,6 +65,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T4(capsys):
     # --R1T4--deposit with invalid number (having letters and symbols other than number) in atm mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
@@ -79,6 +82,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T5(capsys):
     # --R1T5--deposit with invalid number (beginning with 0) in agent mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
@@ -95,6 +99,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T6(capsys):
     # --R1T6--deposit with invalid number (less than 7) in agent mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
@@ -111,6 +116,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T7(capsys):
     # --R1T7--deposit with invalid number (larger than 7) in agent mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
@@ -127,6 +133,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T8(capsys):
     # --R1T4--deposit with invalid number (having letters and symbols other than number) in agent mode
     # Cannot deposit if the account number is invalid with error-pass
     helper(
@@ -143,6 +150,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T1(capsys):
     # --R2T1--ATM deposit above limit
     # Cannot deposit if the amount limit per deposit in ATM exceeds with error-pass
     helper(
@@ -159,6 +167,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R2T2(capsys):
     # --R2T2--ATM deposit within limit
     # Deposit within $2,000 per time in ATM, successful-pass
     helper(
@@ -176,7 +185,7 @@ def test_r2(capsys):
         #expected_output_transactions=['DEP 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
-
+def test_R3T1(capsys):
     # --R3T1--ATM deposit above daily limit
     # Cannot deposit if the daily deposit amount exceeds $5,000 for ATM with error-pass
     helper(
@@ -194,6 +203,7 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R3T2(capsys):
     # --R3T2--ATM deposit within limit
     # Deposit within $5,000 daily successfully - pass
     helper(
@@ -211,6 +221,7 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R3T3(capsys):
     # --R3 T3--Deposit with invalid amount(with letter or symbol) in atm mode
     # error prompt deposit with invalid amount
     helper(
@@ -227,6 +238,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R4T1(capsys):
     # --R4 T1--Agent deposit exceeds
     # Cannot deposit if the withdrawals amount
     # exceeds $999,999.99 in agent mode with error - pass
@@ -244,6 +256,7 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R4T2(capsys):
     # --R4 T2--Deposit in agent mode
     # Deposit in agent mode successfully
     helper(
@@ -260,6 +273,7 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 99999999 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R4T3(capsys):
     # --R4 T3--Deposit in agent mode
     # Deposit in agent mode successfully
     helper(
@@ -276,6 +290,7 @@ def test_r2(capsys):
         expected_output_transactions=['DEP 1234567 99999999 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R4T4(capsys):
     # --R4 T4--Deposit with invalid amount(with letter or symbol) in agent mode
     # error prompt deposit with invalid amount
     helper(
@@ -292,6 +307,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R5T1(capsys):
     # --R5 T1--Deposit on a deleted or Non-existent account in agent mode
     # error prompt for non existent account
     helper(
@@ -308,6 +324,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R5T2(capsys):
     # --R5 T2--Deposit on a deleted or Non-existent account in atm mode
     # error prompt for non existent account
     helper(

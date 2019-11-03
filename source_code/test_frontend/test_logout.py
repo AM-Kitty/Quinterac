@@ -7,7 +7,7 @@ import frontend.Frontend as app
 # path = os.path.dirname(os.path.abspath(__file__))
 
 
-def test_r2(capsys):
+def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
@@ -32,6 +32,7 @@ def test_r2(capsys):
         ]
     )
 
+def test_R1T2(capsys):
     # test for logout after login in agent
     # ---------------- R1T2------------------------------#
     helper(
@@ -50,6 +51,7 @@ def test_r2(capsys):
         ]
     )
 
+def test_R1T3(capsys):
     # ---------------- R1T3------------------------------#
     # test for login after logout in atm
     helper(
@@ -68,6 +70,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R1T4(capsys):
     # ---------------- R1T4------------------------------#
     # test for login after logout in agent
     helper(
@@ -86,6 +89,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T1(capsys):
     # ---------------- R2T1------------------------------#
     # test for withdrawing after logout
     helper(
@@ -102,6 +106,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T2(capsys):
     # ---------------- R2T2------------------------------#
     # test for depositing after logout
     helper(
@@ -118,6 +123,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T3(capsys):
     # ---------------- R2T3------------------------------#
     # test for transferring after logout
     helper(
@@ -134,6 +140,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T4(capsys):
     # ---------------- R2T4------------------------------#
     # test for creating account after logout
     helper(
@@ -150,6 +157,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T5(capsys):
     # ---------------- R2T5------------------------------#
     # test for deleting account after logout
     helper(
@@ -166,6 +174,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T6(capsys):
     # ---------------- R2T6------------------------------#
     # test for login out after logout
     helper(
@@ -184,6 +193,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R3T1(capsys):
     # ---------------- R3T1------------------------------#
     # test for invalid input operation for logout
     helper(
@@ -202,6 +212,7 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+def test_R3T2(capsys):
     # ---------------- R3T2------------------------------#
     # test for logout is not accepted before login
     helper(

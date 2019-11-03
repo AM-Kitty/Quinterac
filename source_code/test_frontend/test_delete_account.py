@@ -5,8 +5,8 @@ import sys
 import frontend.Frontend as app
 
 # path = os.path.dirname(os.path.abspath(__file__))
-
-def test_r2(capsys):
+'''
+def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
@@ -31,6 +31,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R1T2(capsys):
     # --R1T2--agent mode delete
     # Can delete an account in agent mode
     # Successfully create account in agent mode - pass
@@ -49,6 +50,7 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 1234561 000 0000000 newUser', 'EOS 0000000 000 0000000 ***', 'DEL 1234561 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T1(capsys):
     # --R2T1--transfer on deleted account
     # Cannot do any other transactions on a deleted account
     # Error prompt for the account being deleted - pass
@@ -68,6 +70,7 @@ def test_r2(capsys):
         expected_output_transactions=['NEW 1234561 000 0000000 newUser', 'EOS 0000000 000 0000000 ***', 'DEL 1234561 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
 
+def test_R2T2(capsys):
     # --R2T2--deposit on deleted account
     # Cannot do any other transactions on a deleted account
     # Error prompt for the account being deleted - pass
@@ -85,6 +88,8 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+
+def test_R2T3(capsys):
     # --R2T3--withdraw on deleted account
     # Cannot do any other transactions such as withdraw on a deleted account
     # Error prompt for the account being deleted - pass
@@ -102,6 +107,8 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+
+def test_R2T4(capsys):
     # --R2T4--delete on a deleted account
     # Cannot do any other transactions such as withdraw on a deleted account
     # Error prompt for the account being deleted - pass
@@ -119,6 +126,8 @@ def test_r2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
+
+def test_R3T1(capsys):
     # --R3T1--delete account with account number being less than 7
     # Error prompt for delete account (with account number less than 7)
     helper(
@@ -135,6 +144,8 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+
+def test_R3T2(capsys):
     # --R3T2--delete account with account number being larger than 7
     # Error prompt for delete account (with account number less than 7)
     helper(
@@ -151,6 +162,7 @@ def test_r2(capsys):
         expected_output_transactions=[]
     )
 
+def test_R3T3(capsys):
     # --R3T3--delete account with account number containing letters
     # Error prompt for account number containing letters
     helper(
@@ -166,7 +178,7 @@ def test_r2(capsys):
         ],
         expected_output_transactions=[]
     )
-
+'''
 def helper(
         capsys,
         terminal_input,

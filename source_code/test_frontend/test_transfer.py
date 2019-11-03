@@ -334,9 +334,9 @@ def test_R5T2(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '',
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '',
             'Please enter your transaction operations:', 'Log out successfully!', '',
-            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['XFR 1234567 20000 7654321 ***', 'EOS 0000000 000 0000000 ***']
@@ -385,8 +385,8 @@ def test_R6T2(capsys):
             '1234567', '7654321'
         ],
         expected_tail_of_terminal_output=[
-            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:',
-            'Log out successfully!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:',
+            'Log out successfully!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['XFR 1234567 99900 7654321 ***', 'EOS 0000000 000 0000000 ***']

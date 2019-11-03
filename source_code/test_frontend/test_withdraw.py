@@ -249,10 +249,10 @@ def test_R3T3(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Withdraw successfully! Go back to main menu!', '',
-            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:', 'Log out successfully!', '',
             'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['WDR 1234567 10000 0000000 ***', 'EOS 0000000 000 0000000 ***']
@@ -319,9 +319,9 @@ def test_R4T3(capsys):
         expected_tail_of_terminal_output=[
             'Withdraw successfully! Go back to main menu!', '',
             'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:', 'Log out successfully!', '',
-            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['WDR 1234567 50000 0000000 ***', 'EOS 0000000 000 0000000 ***']

@@ -5,7 +5,11 @@ import sys
 import frontend.Frontend as app
 
 # path = os.path.dirname(os.path.abspath(__file__))
+<<<<<<< HEAD
 '''
+=======
+
+>>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
 def test_R1T1(capsys):
     """
     Arguments:
@@ -19,13 +23,13 @@ def test_R1T1(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'delete account'
+            'login', 'atm', 'deleteacct'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=[]
@@ -38,8 +42,8 @@ def test_R1T2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '1234561', 'logout',
-            'login', 'agent', 'delete account', 'newUser', '1234561', 'logout'
+            'login', 'agent', 'createacct', 'newUser', '1234561', 'logout',
+            'login', 'agent', 'deleteacct', 'newUser', '1234561', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -57,8 +61,8 @@ def test_R2T1(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '1234561', 'logout',
-            'login', 'agent', 'delete account', 'newUser', '1234561', 'logout',
+            'login', 'agent', 'createacct', 'newUser', '1234561', 'logout',
+            'login', 'agent', 'deleteacct', 'newUser', '1234561', 'logout',
             'login', 'agent', 'transfer', 'newUser', '1234561'
         ],
         intput_valid_accounts=[
@@ -115,7 +119,7 @@ def test_R2T4(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'delete account', 'newUser', '1234561'
+            'login', 'agent', 'deleteacct', 'newUser', '1234561'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -133,7 +137,7 @@ def test_R3T1(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'delete account', 'newUser', '123456'
+            'login', 'agent', 'deleteacct', 'newUser', '123456'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -151,7 +155,7 @@ def test_R3T2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'delete account', 'newUser', '12345678'
+            'login', 'agent', 'deleteacct', 'newUser', '12345678'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -168,7 +172,7 @@ def test_R3T3(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'delete account', 'newUser', '12345s7'
+            'login', 'agent', 'deleteacct', 'newUser', '12345s7'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'

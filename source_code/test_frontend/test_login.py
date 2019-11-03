@@ -27,7 +27,7 @@ def test_R1T1(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Welcome to bank system!!!!', '', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
             'Enter [atm]: ----> for ATM mode',
             'Enter [agent]: ----> for Agent or privileged (teller) mode', '', 'Which mode do you want to login:'
@@ -48,7 +48,7 @@ def test_R2T1(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed.', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=[]
@@ -60,7 +60,7 @@ def test_R2T2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'create account'
+            'createacct'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -77,7 +77,7 @@ def test_R2T3(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'delete account'
+            'deleteacct'
         ],
         intput_valid_accounts=[
             '1234567','0000000'
@@ -186,7 +186,7 @@ def test_R3T3(capsys):
         ],
         expected_output_transactions=[],
         expected_tail_of_terminal_output=[
-            'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ]
     )
@@ -205,7 +205,7 @@ def test_R3T4(capsys):
         expected_output_transactions=[],
         expected_tail_of_terminal_output=[
             'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ]
     )
@@ -223,7 +223,7 @@ def test_R4T1(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for multiple login.', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=[]
@@ -242,7 +242,7 @@ def test_R4T2(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for multiple login.', 'There are seven transaction operations:',
-            "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=[]

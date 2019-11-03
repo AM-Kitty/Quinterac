@@ -6,7 +6,11 @@ import sys
 import frontend.Frontend as app
 
 # path = os.path.dirname(os.path.abspath(__file__))
+<<<<<<< HEAD
 '''
+=======
+
+>>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
 def test_R1T1(capsys):
     """
     Arguments:
@@ -19,26 +23,30 @@ def test_R1T1(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'atm', 'create account'
+            'login', 'atm', 'createacct'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']",
+            'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
 def test_R1T2(capsys):
+<<<<<<< HEAD
     # --R1T2--agent mode createacct
+=======
+    # --R1T2--agent mode create account
+>>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
     # Can create an account in agent mode
     # Successfully create account in agent mode - pass
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '3333444', 'logout'
+            'login', 'agent', 'createacct', 'newUser', '3333444', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -56,7 +64,7 @@ def test_R2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '0333444'
+            'login', 'agent', 'createacct', 'newUser', '0333444'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -74,8 +82,8 @@ def test_R2T2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '2333444', 'logout',
-            'login', 'agent', 'create account', 'newUser', '2333444'
+            'login', 'agent', 'createacct', 'newUser', '2333444', 'logout',
+            'login', 'agent', 'createacct', 'newUser', '2333444'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -93,7 +101,7 @@ def test_R2T3(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'te'
+            'login', 'agent', 'createacct', 'te'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -111,7 +119,7 @@ def test_R2T4(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'abcdefghijklmnopqrstuvwxyzqwert'
+            'login', 'agent', 'createacct', 'abcdefghijklmnopqrstuvwxyzqwert'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -129,7 +137,7 @@ def test_R2T5(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', ' abc '
+            'login', 'agent', 'createacct', ' abc '
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -146,13 +154,13 @@ def test_R2T6(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'a b c', '1234563'
+            'login', 'agent', 'createacct', 'a b c', '1234563'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Create an account successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'create account', 'delete account', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
+            'Create an account successfully! Go back to main menu!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['NEW 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
     )
@@ -163,7 +171,7 @@ def test_R3T1(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '1234522', 'logout', 'login', 'agent', 'deposit', '1234522'
+            'login', 'agent', 'createacct', 'newUser', '1234522', 'logout', 'login', 'agent', 'deposit', '1234522'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -180,7 +188,7 @@ def test_R3T2(capsys):
     helper(
         capsys=capsys,
         terminal_input=[
-            'login', 'agent', 'create account', 'newUser', '1234523', 'logout', 'login', 'atm', 'deposit', '1234523'
+            'login', 'agent', 'createacct', 'newUser', '1234523', 'logout', 'login', 'atm', 'deposit', '1234523'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
@@ -190,7 +198,11 @@ def test_R3T2(capsys):
         ],
         expected_output_transactions=['NEW 1234523 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
+<<<<<<< HEAD
 '''
+=======
+
+>>>>>>> fe8289fe2d51827832ae2a80be1177b07d5c8ede
 
 def helper(
         capsys,

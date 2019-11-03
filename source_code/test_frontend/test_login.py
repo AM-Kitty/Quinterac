@@ -1,3 +1,4 @@
+import tempfile
 from importlib import reload
 import io
 import sys
@@ -270,11 +271,13 @@ def helper(
     reload(app)
 
     # create a temporary file in the system to store output transactions
-    transaction_summary_file = "TransactionSummaryFile.txt"
+    temp_fd, temp_file = tempfile.mkstemp()
+    transaction_summary_file = temp_file
     open(transaction_summary_file, 'w').close()
 
     # create a temporary file in the system to store the valid accounts:
-    valid_account_list_file = "frontend/ValidAccountListFile.txt"
+    temp_fd2, temp_file2 = tempfile.mkstemp()
+    valid_account_list_file = temp_file2
 
     with open(valid_account_list_file, 'w') as wf:
         wf.write('\n'.join(intput_valid_accounts))

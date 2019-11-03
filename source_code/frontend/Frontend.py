@@ -16,7 +16,7 @@ class Frontend:
 
         # while loop used to check valid input for number selction of operation
         check_list = ["login", "logout", "createacct", "deleteacct", "deposit", "withdraw", "transfer"]
-        print(check_list)
+        # print(check_list)
         print()
         try:
             transaction = input("Please enter your transaction operations:")

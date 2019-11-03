@@ -25,8 +25,8 @@ def test_R1T1(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for ATM creat account or delete account! Please enter other operations!', '', 'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']",
-            '', 'Please enter your transaction operations:'
+            'Error prompt for ATM creat account or delete account! Please enter other operations!', '',
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=[]
     )
@@ -160,7 +160,7 @@ def test_R2T6(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'There are seven transaction operations:', "['login', 'logout', 'createacct', 'deleteacct', 'deposit', 'withdraw', 'transfer']", '', 'Please enter your transaction operations:'
+            'There are seven transaction operations:',  '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['NEW 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***', 'DEL 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
     )

@@ -179,8 +179,9 @@ def test_R2T2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Log out successfully!', '', 'There are seven transaction operations:', '',
-            'Please enter your transaction operations:'
+            'Deposit successfully! Go back to main menu!', '', 'There are seven transaction operations:', '',
+            'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['DEP 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )

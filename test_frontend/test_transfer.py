@@ -302,10 +302,8 @@ def test_R5T2(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:',
-             '',
-            'Please enter your transaction operations:', 'Log out successfully!', '',
-            'There are seven transaction operations:',
-            '', 'Please enter your transaction operations:'
+            '', 'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['XFR 1234567 20000 7654321 ***', 'EOS 0000000 000 0000000 ***']
     )

@@ -217,7 +217,9 @@ def test_R3T2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Please enter your transaction operations:'
+            'Deposit successfully! Go back to main menu!', '', 'There are seven transaction operations:', '',
+            'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
@@ -241,7 +243,7 @@ def test_R3T3(capsys):
 
 def test_R4T1(capsys):
     # --R4T1--Agent deposit exceeds
-    # Cannot deposit if the withdrawals amount
+    # Cannot deposit if the depoists amount
     # exceeds $999,999.99 in agent mode with error - pass
     helper(
         capsys=capsys,
@@ -252,7 +254,7 @@ def test_R4T1(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:'
+            'Over deposit limit, enter a valid amount!', 'Enter your amount:'
         ],
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )
@@ -269,7 +271,9 @@ def test_R4T2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Please enter your transaction operations:'
+            'Deposit successfully! Go back to main menu!', '', 'There are seven transaction operations:', '',
+            'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['DEP 1234567 99999999 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )

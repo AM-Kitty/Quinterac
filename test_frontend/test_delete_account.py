@@ -86,7 +86,7 @@ def test_R2T2(capsys):
         expected_tail_of_terminal_output=[
             'Enter your account number:'
         ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+        expected_output_transactions=[]
     )
 
 def test_R2T3(capsys):
@@ -104,7 +104,7 @@ def test_R2T3(capsys):
         expected_tail_of_terminal_output=[
             'Enter your account number:'
         ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+        expected_output_transactions=[]
     )
 
 def test_R2T4(capsys):
@@ -122,7 +122,7 @@ def test_R2T4(capsys):
         expected_tail_of_terminal_output=[
             'Enter your account number:'
         ],
-        expected_output_transactions=['EOS 0000000 000 0000000 ***']
+        expected_output_transactions=[]
     )
 
 def test_R3T1(capsys):

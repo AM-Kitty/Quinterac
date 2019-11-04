@@ -188,7 +188,6 @@ def test_R2T6(capsys):
         ],
         expected_tail_of_terminal_output=[
             'Error prompt for login failed.', 'There are seven transaction operations:',
-
             '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
@@ -206,9 +205,8 @@ def test_R3T1(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter a valid transaction operation!',  'Please enter your transaction operations:', 'Log out successfully!', '', 'There are seven transaction operations:',
-
-            '', 'Please enter your transaction operations:'
+            'Enter a valid transaction operation!',  'Please enter your transaction operations:', 'Log out successfully!', '', 
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )

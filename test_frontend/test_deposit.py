@@ -179,6 +179,7 @@ def test_R2T2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
+            'Log out successfully!', '', 'There are seven transaction operations:', '',
             'Please enter your transaction operations:'
         ],
         expected_output_transactions=['DEP 1234567 100000 0000000 ***', 'EOS 0000000 000 0000000 ***']
@@ -197,7 +198,7 @@ def test_R3T1(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:Error! Over daily deposit limit!'
+            'Error! Over daily deposit limit!'
         ],
         expected_output_transactions=['DEP 1234567 200000 0000000 ***', 'DEP 1234567 200000 0000000 ***', 'EOS 0000000 000 0000000 ***']
     )

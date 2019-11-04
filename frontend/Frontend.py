@@ -206,7 +206,7 @@ class Frontend:
                         exist = True
                         use_daily_limit[i][2] += amount
                         if use_daily_limit[i][2] > 5000:
-                            print("Error! Over daily deposit limit!")
+                            print("\nError! Over daily deposit limit!")
                             return 1
             if exist == False:
                 use_daily_limit.append([account_number, "DEP", amount])

@@ -100,7 +100,7 @@ def test_R2T2(capsys):
 def test_R2T3(capsys):
     # --R2T3--invalid name create with less than 3 letters
     # Cannot create the account if the name character number is less than 3
-    # EError prompt for invalid account name not over 3 characters - pass
+    # Error prompt for invalid account name not over 3 characters - pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -118,7 +118,7 @@ def test_R2T3(capsys):
 def test_R2T4(capsys):
     # --R2T4--invalid name create with over 30 letters
     # Cannot create the account if the name character number is larger than 30
-    # EError prompt for invalid account name not over 3 characters - pass
+    # Error prompt for invalid account name not over 3 characters - pass
     helper(
         capsys=capsys,
         terminal_input=[

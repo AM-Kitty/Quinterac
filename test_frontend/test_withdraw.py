@@ -7,13 +7,14 @@ import frontend.Frontend as app
 
 path = os.path.dirname(os.path.abspath(__file__))
 
+# test for withdraw
+# ------------------------Withdraw-----------------------------------#
 def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
 
-    # ------------------------Withdraw-------------------------------------#
     # --R1T1--Invalid withdraw account number in atm mode start with 0-----Pass
     helper(
         capsys=capsys,
@@ -21,7 +22,7 @@ def test_R1T1(capsys):
             'login', 'atm', 'withdraw', '0123456'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Account number first digit cannot be zero!', 'Enter your account number:'
@@ -37,7 +38,7 @@ def test_R1T2(capsys):
             'login', 'atm', 'withdraw', '12345'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
@@ -53,7 +54,7 @@ def test_R1T3(capsys):
             'login', 'atm', 'withdraw', '1234567890'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
@@ -69,7 +70,7 @@ def test_R1T4(capsys):
             'login', 'atm', 'withdraw', '12345ba'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
              'Please enter a valid digit number!', 'Enter your account number:'
@@ -85,7 +86,7 @@ def test_R1T5(capsys):
             'login', 'atm', 'withdraw', '8888888'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Account not exist! Enter a existed account to withdraw!',
@@ -102,7 +103,7 @@ def test_R1T6(capsys):
             'login', 'atm', 'withdraw', '1234567'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your amount:'
@@ -118,7 +119,7 @@ def test_R2T1(capsys):
             'login', 'agent', 'withdraw', '0123456'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Account number first digit cannot be zero!', 'Enter your account number:'
@@ -134,7 +135,7 @@ def test_R2T3(capsys):
             'login', 'agent', 'withdraw', '12345'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
@@ -150,7 +151,7 @@ def test_R2T4(capsys):
             'login', 'agent', 'withdraw', '1234567890'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter a valid account number! (Only 7 digits)', 'Enter your account number:'
@@ -166,7 +167,7 @@ def test_R2T5(capsys):
             'login', 'agent', 'withdraw', '12345ba'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Please enter a valid digit number!', 'Enter your account number:'
@@ -182,7 +183,7 @@ def test_R2T6(capsys):
             'login', 'agent', 'withdraw', '8888888'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Account not exist! Enter a existed account to withdraw!',
@@ -199,7 +200,7 @@ def test_R2T7(capsys):
             'login', 'agent', 'withdraw', '1234567'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Enter your amount:'
@@ -215,7 +216,7 @@ def test_R3T1(capsys):
             'login', 'atm', 'withdraw', '1234567', '450000000'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Over ATM withdraw per time limit, enter a valid amount!', 'Enter your amount:'
@@ -224,17 +225,18 @@ def test_R3T1(capsys):
     )
 
 def test_R3T2(capsys):
-    # --R3T2--input invalid ATM withdraw money mixed with characters----Pass
+    # --R3T2-- Invalid ATM Withdraw Amount Input with letters
+    # input invalid ATM withdraw money mixed with characters----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'withdraw', '1234567', '200aa@'
         ],
         intput_valid_accounts=[
-            '1234567'
+            '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:Enter a valid amount!', 'Enter your amount:'
+            'Enter a valid amount!', 'Enter your amount:'
         ],
         expected_output_transactions=[]
     )
@@ -293,7 +295,8 @@ def test_R4T1(capsys):
     )
 
 def test_R4T2(capsys):
-    # --R4T2--input invalid ATM withdraw money mixed with characters----Pass
+    # --R4T2-- Agent withdraw
+    # check for input invalid ATM withdraw money mixed with characters----Pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -303,7 +306,7 @@ def test_R4T2(capsys):
             '1234567'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:Enter a valid amount!', 'Enter your amount:'
+            'Enter a valid amount!', 'Enter your amount:'
         ],
         expected_output_transactions=[]
     )

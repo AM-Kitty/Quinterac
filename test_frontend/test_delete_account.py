@@ -7,16 +7,16 @@ import frontend.Frontend as app
 
 path = os.path.dirname(os.path.abspath(__file__))
 
+# test for delete account
+# ------------------------delete account-------------------------------------#
 def test_R1T1(capsys):
+    # --R1T1--ATM delete mode
+    # Cannot delete account in the ATM mode
+    # Error prompt for deleting account in ATM mode - pass
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-
-    # ------------------------delete account-------------------------------------#
-    # --R1T1--ATM delete mode
-    # Cannot delete account in the ATM mode
-    # Error prompt for deleting account in ATM mode - pass
     helper(
         capsys=capsys,
         terminal_input=[
@@ -26,7 +26,7 @@ def test_R1T1(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for ATM creat account or delete account! Please enter other operations!', '',
+            'Error prompt for ATM create account or delete account! Please enter other operations!', '',
             'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=[]
@@ -89,7 +89,6 @@ def test_R2T2(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
-
 def test_R2T3(capsys):
     # --R2T3--withdraw on deleted account
     # Cannot do any other transactions such as withdraw on a deleted account
@@ -107,7 +106,6 @@ def test_R2T3(capsys):
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
-
 
 def test_R2T4(capsys):
     # --R2T4--delete on a deleted account
@@ -127,9 +125,8 @@ def test_R2T4(capsys):
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )
 
-
 def test_R3T1(capsys):
-    # --R3T1--delete account with account number being less than 7
+    # --R3T1--delete account with account number less than 7 digits
     # Error prompt for delete account (with account number less than 7)
     helper(
         capsys=capsys,
@@ -145,10 +142,9 @@ def test_R3T1(capsys):
         expected_output_transactions=[]
     )
 
-
 def test_R3T2(capsys):
     # --R3T2--delete account with account number being larger than 7
-    # Error prompt for delete account (with account number less than 7)
+    # Error prompt for delete account (with account number more than 7)
     helper(
         capsys=capsys,
         terminal_input=[

@@ -8,7 +8,7 @@ class AccountCheck:
                 amount = float(amount)
                 return amount
             except ValueError:
-                print("Enter a valid amount!")
+                print("\nEnter a valid amount!")
 
     # get the input for account number from user
     def get_account_number(self):

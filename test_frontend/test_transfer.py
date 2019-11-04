@@ -7,13 +7,14 @@ import frontend.Frontend as app
 
 path = os.path.dirname(os.path.abspath(__file__))
 
+# test for transfer
+# ------------------------Transfer----------------------------------#
 def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
 
-    # ------------------------Transfer-------------------------------------#
     # --R1T1--Invalid from transfer account number in atm mode start with 0-----Pass
     helper(
         capsys=capsys,
@@ -44,24 +45,6 @@ def test_R1T2(capsys):
         ],
         expected_output_transactions=[]
     )
-
-def test_R1T3_1(capsys):
-    '''
-    # --R1T3--Invalid from transfer account number not in valid accounts list file-----Failed
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'transfer', '8888888'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Transfer account not existed', 'Enter your account number:'
-        ],
-        expected_output_transactions=['']
-    )
-    '''
 
 def test_R1T3(capsys):
     # --R1T3--Invalid from transfer account number in atm mode mixed with characters-----Pass
@@ -127,25 +110,6 @@ def test_R2T2(capsys):
         ],
         expected_output_transactions=[]
     )
-
-def test_R2T3(capsys):
-
-    '''
-    # --R2T3--Invalid to transfer account number not in valid accounts list file-----Failed
-    helper(
-        capsys=capsys,
-        terminal_input=[
-            'login', 'atm', 'transfer', '1234567', '8888888'
-        ],
-        intput_valid_accounts=[
-            '1234567'
-        ],
-        expected_tail_of_terminal_output=[
-            'Transfer account not existed', 'Enter your account number:'
-        ],
-        expected_output_transactions=['']
-    )
-    '''
 
 def test_R2T3(capsys):
     # --R2T3--Invalid to transfer account number in atm mode mixed with characters-----Pass
@@ -310,7 +274,8 @@ def test_R4T4(capsys):
     )
 
 def test_R5T1(capsys):
-    # --R5T1--ATM transfer over daily amount----Failed
+    # --R5T1--ATM transfer over daily amount----Pass
+    # -- check if the atm transfer daily amount over $10,000
     helper(
         capsys=capsys,
         terminal_input=[
@@ -320,7 +285,7 @@ def test_R5T1(capsys):
             '1234567', '7654321', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:Over ATM transfer daily limit, enter a valid amount!', 'Enter your amount:'
+            'Over ATM transfer daily limit, enter a valid amount!', 'Enter your amount:'
         ],
         expected_output_transactions=[]
     )
@@ -333,7 +298,7 @@ def test_R5T2(capsys):
             'login', 'atm', 'transfer', '1234567', '7654321', '200', 'logout'
         ],
         intput_valid_accounts=[
-            '1234567', '7654321'
+            '1234567', '7654321', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:',
@@ -346,14 +311,14 @@ def test_R5T2(capsys):
     )
 
 def test_R5T3(capsys):
-    # --R5T3--Multiple transfer over ATM daily amount limit-----Pass
+    # --R5T3--Multiple transfer over ATM daily amount limit ($10,000)-----Pass
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'atm', 'transfer', '1234567', '7654321', '10000', 'logout', 'login', 'atm', 'transfer', '1234567', '7654321', '200'
         ],
         intput_valid_accounts=[
-            '1234567', '7654321'
+            '1234567', '7654321', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Error! Over atm daily transfer limit!'
@@ -363,16 +328,17 @@ def test_R5T3(capsys):
 
 def test_R6T1(capsys):
     # --R6T1--Agent transfer over daily amount----Pass
+    # check if the agent transfer amount over daily limit ($999,999.99)
     helper(
         capsys=capsys,
         terminal_input=[
             'login', 'agent', 'transfer', '1234567', '7654321', '99999999999'
         ],
         intput_valid_accounts=[
-            '1234567', '7654321'
+            '1234567', '7654321', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your amount:Over agent transfer daily limit, enter a valid amount!', 'Enter your amount:'
+            'Over agent transfer daily limit, enter a valid amount!', 'Enter your amount:'
         ],
         expected_output_transactions=[]
     )
@@ -385,7 +351,7 @@ def test_R6T2(capsys):
             'login', 'agent', 'transfer', '1234567', '7654321', '999', 'logout'
         ],
         intput_valid_accounts=[
-            '1234567', '7654321'
+            '1234567', '7654321', '0000000'
         ],
         expected_tail_of_terminal_output=[
             'Transfer successfully! Go back to main menu!', '', 'There are seven transaction operations:',  '', 'Please enter your transaction operations:',

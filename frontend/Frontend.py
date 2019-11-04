@@ -132,7 +132,7 @@ class Frontend:
                 self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,
                                  use_daily_limit)
             else:
-                print("\nError prompt for ATM creat account or delete account! Please enter other operations!\n")
+                print("\nError prompt for ATM create account or delete account! Please enter other operations!\n")
                 self.check_trans(self.open_system(), "atm", [transaction_list[0]], valid_account_list, create_acct_list,
                                  use_daily_limit)
 
@@ -164,7 +164,7 @@ class Frontend:
                 self.check_trans(self.open_system(), mode, transaction_list, valid_account_list, create_acct_list,
                                  use_daily_limit)
             else:
-                print("\nError prompt for ATM creat account or delete account! Please enter other operations!\n")
+                print("\nError prompt for ATM create account or delete account! Please enter other operations!\n")
                 self.check_trans(self.open_system(), "atm", [transaction_list[0]], valid_account_list, create_acct_list,
                                  use_daily_limit)
 
@@ -296,10 +296,10 @@ class Frontend:
         amount = accoun_check.get_amount()
         # check if the transfer amount is valid in ATM and agent mode respectively
         while amount > 10000 and mode == "atm":
-            print("Over ATM transfer daily limit, enter a valid amount!")
+            print("\nOver ATM transfer daily limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         while amount > 999999.99 and mode == "agent":
-            print("Over agent transfer daily limit, enter a valid amount!")
+            print("\nOver agent transfer daily limit, enter a valid amount!")
             amount = accoun_check.get_amount()
         exist = False
         if use_daily_limit == [] and mode == "atm":

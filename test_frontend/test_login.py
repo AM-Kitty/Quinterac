@@ -5,20 +5,17 @@ import sys
 import os
 import frontend.Frontend as app
 
-
 path = os.path.dirname(os.path.abspath(__file__))
 
-
+# test for login
+#-----------------Login---------------------------#
 def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
-    #-----------------Login-----------------------------#
-
-    #---------------- R1T1------------------------------#
+    #--R1T1--Login in System
     # test for login to the bank
-    # Test all terminal output to ensure we have keywords as we want
     helper(
         capsys=capsys,
         terminal_input=[
@@ -37,7 +34,7 @@ def test_R1T1(capsys):
     )
 
 def test_R2T1(capsys):
-    #---------------- R2T1------------------------------#
+    #--R2T1--Logout before Login
     # test for logout without login
     helper(
         capsys=capsys,
@@ -55,7 +52,7 @@ def test_R2T1(capsys):
     )
 
 def test_R2T2(capsys):
-    # ---------------- R2T2------------------------------#
+    # --R2T2--create account before login
     # test for create account without login
     helper(
         capsys=capsys,
@@ -72,7 +69,7 @@ def test_R2T2(capsys):
     )
 
 def test_R2T3(capsys):
-    # ---------------- R2T3------------------------------#
+    # --R2T3--delete account before login
     # test for delete account without login
     helper(
         capsys=capsys,
@@ -89,7 +86,7 @@ def test_R2T3(capsys):
     )
 
 def test_R2T4(capsys):
-    # ---------------- R2T4------------------------------#
+    # --R2T4--deposit before login
     # test for deposit without login
     helper(
         capsys=capsys,
@@ -106,7 +103,7 @@ def test_R2T4(capsys):
     )
 
 def test_R2T5(capsys):
-    # ---------------- R2T5------------------------------#
+    # -- R2T5--withdraw before login
     # test for withdraw without login
     helper(
         capsys=capsys,
@@ -123,7 +120,7 @@ def test_R2T5(capsys):
     )
 
 def test_R2T6(capsys):
-    # ---------------- R2T6------------------------------#
+    # -- R2T6--transfer before login
     # test for transfer without login
     helper(
         capsys=capsys,
@@ -140,7 +137,7 @@ def test_R2T6(capsys):
     )
 
 def test_R3T1(capsys):
-    # ---------------- R3T1------------------------------#
+    # -- R3T1--Invalid input operation
     # test for invalid input operation for login
     helper(
         capsys=capsys,
@@ -157,7 +154,7 @@ def test_R3T1(capsys):
     )
 
 def test_R3T2(capsys):
-    # ---------------- R3T2------------------------------#
+    # -- R3T2--Invalid Input Mode
     # test for input invalid operation mode
     helper(
         capsys=capsys,
@@ -174,7 +171,7 @@ def test_R3T2(capsys):
     )
 
 def test_R3T3(capsys):
-    # ---------------- R3T3------------------------------#
+    # -- R3T3--Valid Input Mode for atm
     # test for input valid operation mode for atm
     helper(
         capsys=capsys,
@@ -192,7 +189,7 @@ def test_R3T3(capsys):
     )
 
 def test_R3T4(capsys):
-    # ---------------- R3T4------------------------------#
+    # -- R3T4--Valid Input Mode for agent
     # test for input valid operation mode for agent
     helper(
         capsys=capsys,
@@ -210,7 +207,7 @@ def test_R3T4(capsys):
     )
 
 def test_R4T1(capsys):
-    # ---------------- R4T1------------------------------#
+    # --R4T1--Over Login in atm
     # test for multiple login in atm
     helper(
         capsys=capsys,
@@ -228,7 +225,7 @@ def test_R4T1(capsys):
     )
 
 def test_R4T2(capsys):
-    # ---------------- R4T2------------------------------#
+    # -- R4T2--Over Login in agent
     # test for multiple login in agent
     helper(
         capsys=capsys,

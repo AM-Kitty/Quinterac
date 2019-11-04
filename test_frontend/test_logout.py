@@ -5,18 +5,17 @@ import sys
 import os
 import frontend.Frontend as app
 
-
 path = os.path.dirname(os.path.abspath(__file__))
 
-
+# test for logout
+#-----------------------logout-----------------------------#
 def test_R1T1(capsys):
     """
     Arguments:
         capsys -- object created by pytest to capture stdout and stderr
     """
 
-    #-----------------------logout-------------------------------#
-    # ---------------- R1T1------------------------------#
+    # --R1T1--logout in atm mode
     # test for logout after login in atm
     helper(
         capsys=capsys,
@@ -35,8 +34,8 @@ def test_R1T1(capsys):
     )
 
 def test_R1T2(capsys):
+    # --R1T2--logout in agent mode
     # test for logout after login in agent
-    # ---------------- R1T2------------------------------#
     helper(
         capsys=capsys,
         terminal_input=[
@@ -54,7 +53,7 @@ def test_R1T2(capsys):
     )
 
 def test_R1T3(capsys):
-    # ---------------- R1T3------------------------------#
+    # --R1T3--login after logout in atm
     # test for login after logout in atm
     helper(
         capsys=capsys,
@@ -73,7 +72,7 @@ def test_R1T3(capsys):
     )
 
 def test_R1T4(capsys):
-    # ---------------- R1T4------------------------------#
+    # --R1T4--login after logout in agent
     # test for login after logout in agent
     helper(
         capsys=capsys,
@@ -92,7 +91,7 @@ def test_R1T4(capsys):
     )
 
 def test_R2T1(capsys):
-    # ---------------- R2T1------------------------------#
+    # -- R2T1--withdraw after logout
     # test for withdrawing after logout
     helper(
         capsys=capsys,
@@ -109,7 +108,7 @@ def test_R2T1(capsys):
     )
 
 def test_R2T2(capsys):
-    # ---------------- R2T2------------------------------#
+    # --R2T2--deposit after logout
     # test for depositing after logout
     helper(
         capsys=capsys,
@@ -126,7 +125,7 @@ def test_R2T2(capsys):
     )
 
 def test_R2T3(capsys):
-    # ---------------- R2T3------------------------------#
+    # -- R2T3--transfer after logout
     # test for transferring after logout
     helper(
         capsys=capsys,
@@ -143,7 +142,7 @@ def test_R2T3(capsys):
     )
 
 def test_R2T4(capsys):
-    # ---------------- R2T4------------------------------#
+    # --R2T4--create account after logout
     # test for creating account after logout
     helper(
         capsys=capsys,
@@ -160,7 +159,7 @@ def test_R2T4(capsys):
     )
 
 def test_R2T5(capsys):
-    # ---------------- R2T5------------------------------#
+    # --R2T5--delete account after logout
     # test for deleting account after logout
     helper(
         capsys=capsys,
@@ -177,7 +176,7 @@ def test_R2T5(capsys):
     )
 
 def test_R2T6(capsys):
-    # ---------------- R2T6------------------------------#
+    # -- R2T6--Login after logout
     # test for login out after logout
     helper(
         capsys=capsys,
@@ -196,7 +195,7 @@ def test_R2T6(capsys):
     )
 
 def test_R3T1(capsys):
-    # ---------------- R3T1------------------------------#
+    # --R3T1--Invalid Input Operation
     # test for invalid input operation for logout
     helper(
         capsys=capsys,
@@ -215,7 +214,7 @@ def test_R3T1(capsys):
     )
 
 def test_R3T2(capsys):
-    # ---------------- R3T2------------------------------#
+    # --R3T2--Logout before a successful login
     # test for logout is not accepted before login
     helper(
         capsys=capsys,
@@ -226,15 +225,12 @@ def test_R3T2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Error prompt for login failed.', 'There are seven transaction operations:',
-             '',
+            'Error prompt for login failed.', 'There are seven transaction operations:', '',
             'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
             'Enter [atm]: ----> for ATM mode', 'Enter [agent]: ----> for Agent or privileged (teller) mode', '',
-            'Which mode do you want to login:', 'There are seven transaction operations:',
-             '',
+            'Which mode do you want to login:', 'There are seven transaction operations:', '',
             'Please enter your transaction operations:', 'Log out successfully!', '',
-            'There are seven transaction operations:',
-            '', 'Please enter your transaction operations:'
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['EOS 0000000 000 0000000 ***']
     )

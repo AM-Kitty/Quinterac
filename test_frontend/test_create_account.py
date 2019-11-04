@@ -46,7 +46,15 @@ def test_R1T2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Please enter your transaction operations:'
+            'Create an account successfully! Go back to main menu!', '', 'There are seven transaction operations:', '', 'Please enter your transaction operations:',
+            'Log out successfully!', '', 'There are seven transaction operations:', '',
+            'Please enter your transaction operations:', 'There are two types of mode you can login:', '',
+            'Enter [atm]: ----> for ATM mode', 'Enter [agent]: ----> for Agent or privileged (teller) mode', '',
+            'Which mode do you want to login:', 'There are seven transaction operations:', '',
+            'Please enter your transaction operations:', 'Enter your account name:Enter your account number:',
+            'Delete an account successfully! Go back to main menu!', '', 'There are seven transaction operations:', '',
+            'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
         ],
         expected_output_transactions=['NEW 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***',
                                       'DEL 3333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
@@ -65,7 +73,7 @@ def test_R2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your account number:'
+            'Account number first digit cannot be zero!', 'Enter your account number:'
         ],
         expected_output_transactions=[]
     )
@@ -84,7 +92,7 @@ def test_R2T2(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your account number:'
+            'Should not be same account number (account already exist)', 'Enter your account number:'
         ],
         expected_output_transactions=['NEW 2333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
@@ -102,7 +110,7 @@ def test_R2T3(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your account name:'
+            'Enter your account name:Enter a valid account name!', 'Enter your account name:'
         ],
         expected_output_transactions=['NEW 2333444 000 0000000 newUser', 'EOS 0000000 000 0000000 ***']
     )
@@ -120,7 +128,7 @@ def test_R2T4(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your account name:'
+            'Enter your account name:Enter a valid account name!', 'Enter your account name:'
         ],
         expected_output_transactions=[]
     )
@@ -140,7 +148,7 @@ def test_R2T5(capsys):
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'Enter your account name:'
+            'Enter your account name:Enter a valid account name(no space for beginning or ending)!', 'Enter your account name:'
         ],
         expected_output_transactions=[]
     )
@@ -153,16 +161,33 @@ def test_R2T6(capsys):
         capsys=capsys,
         terminal_input=[
             'login', 'agent', 'createacct', 'a b c', '1234563', 'logout',
+        ],
+        intput_valid_accounts=[
+            '1234567', '0000000'
+        ],
+        expected_tail_of_terminal_output=[
+             'Create an account successfully! Go back to main menu!', '',
+            'There are seven transaction operations:', '',
+            'Please enter your transaction operations:', 'Log out successfully!', '',
+            'There are seven transaction operations:', '', 'Please enter your transaction operations:'
+        ],
+        expected_output_transactions=['NEW 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
+    )
+
+    helper(
+        capsys=capsys,
+        terminal_input=[
             'login', 'agent', 'deleteacct', 'a b c', '1234563', 'logout'
         ],
         intput_valid_accounts=[
             '1234567', '0000000'
         ],
         expected_tail_of_terminal_output=[
-            'There are seven transaction operations:',  '', 'Please enter your transaction operations:'
+            'Please enter your transaction operations:'
         ],
-        expected_output_transactions=['NEW 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***', 'DEL 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
+        expected_output_transactions=['DEL 1234563 000 0000000 a b c', 'EOS 0000000 000 0000000 ***']
     )
+
 
 def test_R3T1(capsys):
     # --R3T1--new account, can not do other transactions in agent mode - pass

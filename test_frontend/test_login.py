@@ -3,7 +3,7 @@ from importlib import reload
 import io
 import sys
 import os
-import frontend.Frontend as app
+import src.Frontend as app
 
 path = os.path.dirname(os.path.abspath(__file__))
 

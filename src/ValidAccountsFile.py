@@ -2,7 +2,8 @@ import sys
 
 '''
 Class ValidAccountsFile:
-read valid accounts list file and write in new accounts
+read valid accounts list file for frontend
+modify accounts to create a new valid accounts list for frontend to run
 '''
 
 
@@ -20,7 +21,7 @@ class ValidAccountsFile:
             print("File not find! No such file or directory: 'ValidAccountListFile.txt'")
             sys.exit(1)
 
-    # modify the valid account
+    # modify the valid account to update into the new accounts list file
     def modify_file_ValidAccount(self, valid_account_list):
         file = open("ValidAccountListFile.txt", "w")
         # write all valid accounts into the valid account list file

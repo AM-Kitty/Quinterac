@@ -1,13 +1,12 @@
-import frontend.TransactionFile as t
-import frontend.ValidAccountsFile as v
-import frontend.Accountcheck as a
-import sys
+import src.TransactionFile as t
+import src.ValidAccountsFile as v
+import src.Accountcheck as a
+import src.Backend as b
 
 '''
 Class Frontend:
 overall bank interface to allow user to do transactions
 '''
-
 
 class Frontend:
     # ask for the operation selection

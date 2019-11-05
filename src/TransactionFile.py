@@ -1,9 +1,12 @@
-import sys
-
+'''
+class: TransactionFile
+create the Merged Transaction Summary File
+which is the concatenation of any number of Transaction Summary Files output from Front Ends
+'''
 
 class TransactionFile:
 
-    #  function for writing a transaction summary file
+    #  function for writing the transaction summary file
     def write_trans_summry(self, transaction_list):
         newsummary = ""
         space = " "

@@ -4,6 +4,8 @@ create the Merged Transaction Summary File
 which is the concatenation of any number of Transaction Summary Files output from Front Ends
 '''
 
+import sys
+
 class TransactionFile:
 
     #  function for writing the transaction summary file

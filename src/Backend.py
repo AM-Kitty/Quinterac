@@ -5,6 +5,8 @@ reads in the previous day’s master accounts file and then applies all of the t
 in a set of daily transaction files to the accounts to produce today’s new master accounts file
 '''
 
+import sys
+
 class Backend:
 
     #  function for updating the master accounts file

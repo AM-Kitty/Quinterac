@@ -1,5 +1,5 @@
 # Quinterac - CISC 327
-## Scarlet FlashView Members:
+#### Scarlet FlashView Members:
 * Tongxu Ge 20054696
 * Jinting Zhang 20059360
 * Jinghong Xiao 20035787

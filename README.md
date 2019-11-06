@@ -1,5 +1,5 @@
 # Quinterac - CISC 327
-[![Build Status]](https://github.com/dwyl/repo-badges/blob/master/svg/build-passing.svg)
+[![HitCount](http://hits.dwyl.io/AM-Kitty/Quinterac.svg)](http://hits.dwyl.io/AM-Kitty/Quinterac)
 ### Scarlet FlashView Members:
 * Tongxu Ge 20054696
 * Jinting Zhang 20059360

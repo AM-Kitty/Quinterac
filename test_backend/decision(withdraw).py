@@ -6,15 +6,13 @@ from importlib import reload
 import src.Backend as app
 
 path = os.path.dirname(os.path.abspath(__file__))
-
-# decision coverage and block coverage test cases for create account and withdraw
-# test cases for decision coverage cover the test cases for block coverage, which will be labeled as comment below
+# white box testing
+# decision coverage and block coverage test cases for withdraw
 #-----------------------------------------------------------
 #---------------------- withdraw ----------------------------
 #-----------------------------------------------------------
 
 # -----------------T1(decision)--------------------
-# two test cases are the same, labeled the same way below
 # decision point at 1: when 1 is true-> i[0] == "WDR"
 def test_1(capsys):
     helper(capsys,
@@ -35,14 +33,14 @@ def test_2(capsys):
            )
 
 # -----------------T3(decision)--------------------
-# decision point at 2: when 2 is false-> i[1] != "1234567" (the account number does not exist)
+# decision point at 2: when 2 is false-> "1122334" (the account number does not exist)
 # terminate and output nothing
 def test_3(capsys):
     helper(capsys,
-           input_transaction_summary_file=['WDR 1234568 100000 0000000 Theo\n', 'EOS 0000000 000 0000000 ***'],
+           input_transaction_summary_file=['WDR 1122334 100000 0000000 Theo\n', 'EOS 0000000 000 0000000 ***'],
            input_master_accounts_file=["1234567 200000 Theo"],
            expected_new_master_account=["1234567 200000 Theo"],
-           expected_tail_of_terminal_output=[]
+           expected_tail_of_terminal_output=['Error! 1122334 not in the master account file!']
            )
 
 # -----------------T4(decision)--------------------
@@ -58,7 +56,7 @@ def test_4(capsys):
 
 # -----------------T5(decision)-----------------------------
 # decision point at 7: when 7 is true-> len(line) > 47
-def test_5(capsys):
+def test_9(capsys):
     helper(capsys,
            input_transaction_summary_file=['WDR 2233445 100000 0000000 KellyKellyKellyKe\n', 'EOS 0000000 000 0000000 ***'],
            input_master_accounts_file=["2233445 12345678901234567890123 KellyKellyKellyKe"],

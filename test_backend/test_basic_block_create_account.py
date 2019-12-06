@@ -31,7 +31,7 @@ def test_5(capsys):
     helper(capsys,
            input_transaction_summary_file=['NEW 1122334 000 0000000 theoXiao\n', 'EOS 0000000 000 0000000 ***'],
            input_master_accounts_file=["1234567 400000 Theo"],
-           expected_new_master_account=["1122334 0 theoXiao", "1234567 400000 Theo"],
+           expected_new_master_account=["1122334 0000 theoXiao", "1234567 400000 Theo"],
            expected_tail_of_terminal_output=["New Valid Accounts File created successfully!"]
            )
 

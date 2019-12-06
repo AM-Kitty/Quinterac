@@ -85,7 +85,7 @@ class Backend:
 
             elif i[0] == "NEW":
                 if i[1] in master_list:
-                    print("\nError! New account must have an unused account number!")
+                    print("Error! New account must have an unused account number!")
                     return False
                 if len(i) > 5:  # if user name have space, then reevaluate name (include space)
                     name = ""
@@ -109,7 +109,7 @@ class Backend:
                         print("Error! Balance is not zero, cannot delete!")
                         return False
                     else:
-                        print("\nError! Name not match the deleted account!")
+                        print("Error! Name not match the deleted account!")
                         return False
                 else:
                     print("Error! " + str(i[1]) + " not in the master account file!")
@@ -136,7 +136,7 @@ class Backend:
             line = str(i) + " " + data[i][0] + " " + data[i][1] + "\n"
             file_data.write(line)
         file_data.close()  # finish write new master account file
-        print("\n\nNew Master Accounts File created successfully!")
+        print("New Master Accounts File created successfully!")
 
     # function use to write new valid account file
     # function input master account file data, data type dictionary

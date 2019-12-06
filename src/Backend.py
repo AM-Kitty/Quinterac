@@ -91,9 +91,9 @@ class Backend:
                     name = ""
                     for letter in i[4:]:
                         name += letter + " "
-                    master_list[i[1]] = ["0000", name[0:-2]]
+                    master_list[i[1]] = ["0", name[0:-2]]
                 else:
-                    master_list[i[1]] = ["0000", i[-1][0:-1]]
+                    master_list[i[1]] = ["0", i[-1][0:-1]]
 
             elif i[0] == "DEL":
                 if i[1] in master_list:

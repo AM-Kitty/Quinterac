@@ -69,18 +69,6 @@ class Backend:
                     print("Error! " + str(i[1]) + " not in the master account file!")
                     return False
 
-            elif i[0] == "NEW":
-                if i[1] in master_list:
-                    print("Error! New account must have an unused account number!")
-                    return False
-                if len(i) > 5:#if user name have space, then re-evaluate name (include space)
-                    name = ""
-                    for letter in i[4:]:
-                        name += letter + " "
-                    master_list[i[1]] = ["0", name[0:-2]]
-                else:
-                    master_list[i[1]] = ["0", i[-1][0:-1]]           
-
             elif i[0] == "XFR":
                 if i[1] in master_list and i[3] in master_list:
                     balance = int(master_list[i[1]][0]) - int(i[2])
@@ -94,6 +82,18 @@ class Backend:
                 else:
                     print("Account not in the master account file!")
                     return False
+
+            elif i[0] == "NEW":
+                if i[1] in master_list:
+                    print("\nError! New account must have an unused account number!")
+                    return False
+                if len(i) > 5:  # if user name have space, then reevaluate name (include space)
+                    name = ""
+                    for letter in i[4:]:
+                        name += letter + " "
+                    master_list[i[1]] = ["0000", name[0:-2]]
+                else:
+                    master_list[i[1]] = ["0000", i[-1][0:-1]]
 
             elif i[0] == "DEL":
                 if i[1] in master_list:
@@ -109,7 +109,7 @@ class Backend:
                         print("Error! Balance is not zero, cannot delete!")
                         return False
                     else:
-                        print("Error! Name not match the deleted account!")
+                        print("\nError! Name not match the deleted account!")
                         return False
                 else:
                     print("Error! " + str(i[1]) + " not in the master account file!")
@@ -136,7 +136,7 @@ class Backend:
             line = str(i) + " " + data[i][0] + " " + data[i][1] + "\n"
             file_data.write(line)
         file_data.close()  # finish write new master account file
-        print("New Master Accounts File created successfully!")
+        print("\n\nNew Master Accounts File created successfully!")
 
     # function use to write new valid account file
     # function input master account file data, data type dictionary

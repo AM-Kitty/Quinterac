@@ -1,59 +1,59 @@
-'''
-class: TransactionFile
-create the Merged Transaction Summary File
-which is the concatenation of any number of Transaction Summary Files output from Front Ends
-'''
-
 import sys
 
+
+# class: TransactionFile
+# create the Merged Transaction Summary File
+# which is the concatenation of any number of Transaction Summary Files output from Front Ends
 class TransactionFile:
 
     #  function for writing the transaction summary file
-    def write_trans_summry(self, transaction_list):
-        newsummary = ""
+    @staticmethod
+    def write_trans_summary(transaction_list, file):
+        new_summary = ""
         space = " "
         try:
-            file_data = open("TransactionSummaryFile.txt", "a")
+            file_data = open(file, "a")
 
             if transaction_list[1] == "DEP":
-                newsummary += (transaction_list[1] + space)
-                newsummary += (str(transaction_list[2]) + space)
-                newsummary += (str(transaction_list[3]) + space)
-                newsummary += "0000000 ***\n"
-                file_data.write(newsummary)
+                new_summary += (transaction_list[1] + space)
+                new_summary += (str(transaction_list[2]) + space)
+                new_summary += (str(transaction_list[3]) + space)
+                new_summary += "0000000 ***\n"
+                file_data.write(new_summary)
 
             elif transaction_list[1] == "WDR":
-                newsummary += (transaction_list[1] + space)
-                newsummary += (str(transaction_list[2]) + space)
-                newsummary += (str(transaction_list[3]) + space)
-                newsummary += "0000000 ***\n"
-                file_data.write(newsummary)
+                new_summary += (transaction_list[1] + space)
+                new_summary += (str(transaction_list[2]) + space)
+                new_summary += (str(transaction_list[3]) + space)
+                new_summary += "0000000 ***\n"
+                file_data.write(new_summary)
+
             elif transaction_list[1] == "XFR":
-                newsummary += (transaction_list[1] + space)
-                newsummary += (str(transaction_list[2]) + space)
-                newsummary += (str(transaction_list[3]) + space)
-                newsummary += (str(transaction_list[4]) + space)
-                newsummary += "***\n"
-                file_data.write(newsummary)
+                new_summary += (transaction_list[1] + space)
+                new_summary += (str(transaction_list[2]) + space)
+                new_summary += (str(transaction_list[3]) + space)
+                new_summary += (str(transaction_list[4]) + space)
+                new_summary += "***\n"
+                file_data.write(new_summary)
 
             elif transaction_list[1] == "NEW":
-                newsummary += (transaction_list[1] + space)
-                newsummary += (str(transaction_list[2]) + space)
-                newsummary += "000 0000000 "
-                newsummary += (transaction_list[3] + "\n")
-                file_data.write(newsummary)
+                new_summary += (transaction_list[1] + space)
+                new_summary += (str(transaction_list[2]) + space)
+                new_summary += "000 0000000 "
+                new_summary += (transaction_list[3] + "\n")
+                file_data.write(new_summary)
 
             elif transaction_list[1] == "DEL":
-                newsummary += (transaction_list[1] + space)
-                newsummary += (str(transaction_list[2]) + space)
-                newsummary += "000 0000000 "
-                newsummary += (transaction_list[3] + "\n")
-                file_data.write(newsummary)
+                new_summary += (transaction_list[1] + space)
+                new_summary += (str(transaction_list[2]) + space)
+                new_summary += "000 0000000 "
+                new_summary += (transaction_list[3] + "\n")
+                file_data.write(new_summary)
 
             elif transaction_list[1] == "EOS":
-                newsummary += (transaction_list[1] + space)
-                newsummary += "0000000 000 0000000 ***\n"
-                file_data.write(newsummary)
+                new_summary += (transaction_list[1] + space)
+                new_summary += "0000000 000 0000000 ***\n"
+                file_data.write(new_summary)
             file_data.close()
 
         except FileNotFoundError as error:

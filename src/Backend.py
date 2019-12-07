@@ -64,7 +64,10 @@ class Backend:
                         print("Error! " + str(i[1]) + " have a negative balance!")
                         return False
                     else:
-                        master_list[i[1]][0] = str(balance)
+                        if balance == 0:
+                            master_list[i[1]][0] = "0000"
+                        else:
+                            master_list[i[1]][0] = str(balance)
                 else:
                     print("Error! " + str(i[1]) + " not in the master account file!")
                     return False

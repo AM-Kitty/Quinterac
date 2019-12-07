@@ -4,10 +4,7 @@ import Backend
 import Frontend
 import os
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 485bf2e72d844d462b785223e1b61d914b24abab
 # create a “Daily” script to run frontend and backend
 def main():
     # runs Front End over 3 transaction sessions

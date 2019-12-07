@@ -35,8 +35,8 @@ def main():
     # day five terminal input
     day_five = [
         'login', 'agent', 'deposit', '6666666', '500', 'logout',
-        'login', 'agent', 'deposit', '6666666', '600', 'logout',
-        'login', 'agent', 'deposit', '6666666', '600', 'logout',
+        'login', 'agent', 'deposit', '8888888', '600', 'logout',
+        'login', 'agent', 'createacct', 'ZJT', '4333333', 'logout',
     ]
     days = [day_one, day_two, day_three, day_four, day_five]
     for i in days:

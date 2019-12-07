@@ -3,7 +3,7 @@ import Backend
 import Frontend
 import os
 
-# create a “Daily” script to run fontend and backend
+# create a “Daily” script to run frontend and backend
 def main():
     # runs Front End over 3 transaction sessions
     number_of_transaction_sessions = 3

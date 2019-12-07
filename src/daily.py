@@ -1,9 +1,14 @@
+# coding=utf-8
 import sys
 import Backend
 import Frontend
 import os
 
-# create a “Daily” script to run fontend and backend
+<<<<<<< HEAD
+
+=======
+>>>>>>> 485bf2e72d844d462b785223e1b61d914b24abab
+# create a “Daily” script to run frontend and backend
 def main():
     # runs Front End over 3 transaction sessions
     number_of_transaction_sessions = 3
@@ -12,7 +17,7 @@ def main():
         sys.argv = [
             'Frontend.py',
             'ValidAccountListFile.txt',
-            'DailySession/TransactionSummaryFile' + str(i+1) + '.txt']
+            'DailySession/TransactionSummaryFile' + str(i + 1) + '.txt']
         Frontend.main()
 
     # concatenates the separate Transaction Summary Files into a Merged Transaction Summary file
@@ -20,7 +25,10 @@ def main():
     with open('TransactionSummaryFile.txt', 'w') as result:
         for f in files:
             for line in open("DailySession/" + f, 'r'):
-                result.write(line)
+                if "EOS" not in line:
+                    result.write(line)
+        result.write("EOS 0000000 000 0000000 ***\n")
+        result.close()
 
     # remove separate Transaction Summary Files
     file = os.listdir("DailySession/")

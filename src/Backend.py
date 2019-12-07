@@ -85,6 +85,7 @@ class Backend:
 
             elif i[0] == "NEW":
                 if i[1] in master_list:
+                    print(i[1])
                     print("Error! New account must have an unused account number!")
                     return False
                 if len(i) > 5:  # if user name have space, then reevaluate name (include space)

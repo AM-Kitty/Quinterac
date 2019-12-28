@@ -1,6 +1,6 @@
-# Quinterac - CISC 327
+# Quinterac Banking System
 [![HitCount](http://hits.dwyl.io/AM-Kitty/Quinterac.svg)](http://hits.dwyl.io/AM-Kitty/Quinterac)
-#### All our source code is in src/ folder
+#### a basic banking system with Python
 ### Scarlet FlashView Members:
 * Tongxu Ge 20054696
 * Jinting Zhang 20059360

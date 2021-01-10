@@ -1,9 +1,10 @@
-# Quinterac Banking System
+# Quinterac Bank System
 [![HitCount](http://hits.dwyl.io/AM-Kitty/Quinterac.svg)](http://hits.dwyl.io/AM-Kitty/Quinterac)
-#### a basic banking system with Python
+### Programming Environment
+Python
 ### Scarlet FlashView Members:
-* Tongxu Ge 20054696
-* Jinting Zhang 20059360
-* Jinghong Xiao 20035787
-* Yanyu Yang 20075550
+* Tongxu Ge 
+* Jinting Zhang 
+* Jinghong Xiao 
+* Yanyu Yang 
         
